@@ -55,6 +55,12 @@
             <artifactId>ruoyi-framework</artifactId>
         </dependency>
 
+        <!-- 商品模块-->
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-goods</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
