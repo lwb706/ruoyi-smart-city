@@ -35,10 +35,6 @@ public class GoodsAppController extends BaseController{
     @Autowired
     private GoodsAppRouter goodsAppRouter;
 
-    @PostConstruct
-    public void init(){
-        System.out.println("判断模块有没有被加载！");
-    }
 
     @RequestMapping("/app")
     public Object getParamMessage(HttpServletRequest request, HttpServletResponse response){
