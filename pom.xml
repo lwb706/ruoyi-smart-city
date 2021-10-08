@@ -204,6 +204,20 @@
                 <version>${ruoyi.version}</version>
             </dependency>
 
+            <!-- 商品模块-->
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi-goods</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
+
+            <!-- 旅游模块-->
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi-travel</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
