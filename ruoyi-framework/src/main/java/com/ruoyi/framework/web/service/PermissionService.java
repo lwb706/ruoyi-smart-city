@@ -255,6 +255,7 @@ public class PermissionService
             catch (Exception e)
             {
                 log.error("Error reading property [{}] from principal of type [{}]", property, principal.getClass().getName());
+               // log.error("Error reading property [{}] from principal of type [{}]", property, principal.getClass().getName());
             }
         }
         return null;
