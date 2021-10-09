@@ -44,7 +44,7 @@ public class GoodsManageController extends BaseController{
             if(StringUtils.isNotEmpty(tranceCode)){
                 GoodsManageActionEnum goodsManageActionEnum = GoodsManageActionEnum.valueOf(tranceCode);
                 Object obj = JSON.unmarshal(request.getParameter(PARAM), goodsManageActionEnum.getDomainClass());
-                Object result = goodsManageRouter.getGoodsManageService(tranceCode).actionRequest(obj);
+                Object result = goodsManageRouter.getGoodsManageService(tranceCode).actionRequest(obj, goodsManageActionEnum.getOperType());
                 //返回成功数据
                 return success(result);
             }
