@@ -1,8 +1,7 @@
 package com.ruoyi.goods.app.enums;
 
 import com.ruoyi.goods.app.constants.GoodsAppConstants;
-import com.ruoyi.goods.app.service.impl.GoodsAppServiceImpl;
-import com.ruoyi.goods.app.service.impl.Test2ServiceImpl;
+import com.ruoyi.goods.domain.Goods;
 
 /**
  * CLASS_NAME
@@ -13,8 +12,8 @@ import com.ruoyi.goods.app.service.impl.Test2ServiceImpl;
  */
 public enum GoodsAppActionEnum {
 
-    GOODS0001(GoodsAppConstants.GOODS0001, GoodsAppServiceImpl.class),
-    GOODS0002(GoodsAppConstants.GOODS0002, Test2ServiceImpl.class);
+    GOODS0001(GoodsAppConstants.GOODS0001, Goods.class),
+    GOODS0002(GoodsAppConstants.GOODS0002, Goods.class);
 
 
     GoodsAppActionEnum(String code, Class domainClass) {

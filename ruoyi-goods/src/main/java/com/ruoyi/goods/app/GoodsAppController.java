@@ -5,15 +5,10 @@ import com.ruoyi.common.json.JSON;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.goods.app.enums.GoodsAppActionEnum;
 import com.ruoyi.goods.app.router.GoodsAppRouter;
-import com.ruoyi.goods.app.service.GoodsAppService;
-import com.ruoyi.goods.app.service.impl.GoodsAppServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GoodsAppController extends BaseController{
 
 
-    private static final String TRANCE_CODE = "tranceCode";
+    private static final String TRAN_CODE = "tranCode";
 
     private static final String PARAM = "param";
 
@@ -38,21 +33,18 @@ public class GoodsAppController extends BaseController{
 
     @RequestMapping("/app")
     public Object getParamMessage(HttpServletRequest request, HttpServletResponse response){
-        String tranceCode = request.getParameter(TRANCE_CODE);
+        String tranceCode = request.getParameter(TRAN_CODE);
         try {
             if(StringUtils.isNotEmpty(tranceCode)){
                 GoodsAppActionEnum goodsAppActionEnum = GoodsAppActionEnum.valueOf(tranceCode);
-                String result = goodsAppRouter.getGoodsAppService(tranceCode).actionRequest();
-                System.out.println(result);
-                return result;
-                //TODO 各自实现里面把json参数转换为对象
-                //Object obj = JSON.unmarshal(request.getParameter(PARAM), goodsAppActionEnum.getDomainClass());
+                Object obj = JSON.unmarshal(request.getParameter(PARAM), goodsAppActionEnum.getDomainClass());
+                String result = goodsAppRouter.getGoodsAppService(tranceCode).actionRequest(obj);
+                //返回成功数据
+                return success(result);
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            logger.warn("商品app,[{}]接口请求失败", tranceCode, e);
         }
-
-        return null;
+        return error();
     }
 }
