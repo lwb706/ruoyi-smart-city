@@ -5,6 +5,7 @@ import com.ruoyi.common.json.JSON;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.goods.app.enums.GoodsAppActionEnum;
 import com.ruoyi.goods.app.router.GoodsAppRouter;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,9 +39,9 @@ public class GoodsAppController extends BaseController{
             if(StringUtils.isNotEmpty(tranceCode)){
                 GoodsAppActionEnum goodsAppActionEnum = GoodsAppActionEnum.valueOf(tranceCode);
                 Object obj = JSON.unmarshal(request.getParameter(PARAM), goodsAppActionEnum.getDomainClass());
-                String result = goodsAppRouter.getGoodsAppService(tranceCode).actionRequest(obj);
+                Object result = goodsAppRouter.getGoodsAppService(tranceCode).actionRequest(obj);
                 //返回成功数据
-                return success(JSON.marshal(result));
+                return success(result);
             }
         } catch (Exception e) {
             logger.warn("商品app,[{}]接口请求失败", tranceCode, e);

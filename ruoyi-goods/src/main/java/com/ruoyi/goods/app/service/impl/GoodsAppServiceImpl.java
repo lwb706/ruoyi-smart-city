@@ -11,6 +11,6 @@ public class GoodsAppServiceImpl implements GoodsAppService {
 
         Goods goods = (Goods) obj;
         System.out.println("获取到的对象为：" + goods);
-        return (T) "测试1";
+        return (T) goods;
     }
 }
