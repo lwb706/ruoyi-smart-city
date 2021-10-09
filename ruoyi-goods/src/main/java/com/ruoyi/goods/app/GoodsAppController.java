@@ -40,7 +40,7 @@ public class GoodsAppController extends BaseController{
                 Object obj = JSON.unmarshal(request.getParameter(PARAM), goodsAppActionEnum.getDomainClass());
                 String result = goodsAppRouter.getGoodsAppService(tranceCode).actionRequest(obj);
                 //返回成功数据
-                return success(result);
+                return success(JSON.marshal(result));
             }
         } catch (Exception e) {
             logger.warn("商品app,[{}]接口请求失败", tranceCode, e);
