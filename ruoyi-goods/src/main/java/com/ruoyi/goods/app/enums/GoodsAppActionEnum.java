@@ -12,8 +12,8 @@ import com.ruoyi.goods.domain.Goods;
  */
 public enum GoodsAppActionEnum {
 
-    GOODS0001(GoodsAppConstants.GOODS0001, Goods.class),
-    GOODS0002(GoodsAppConstants.GOODS0002, Goods.class);
+    GOODS0001(GoodsAppConstants.GOODS0001, Object.class),
+    GOODS0002(GoodsAppConstants.GOODS0002, Object.class);
 
 
     GoodsAppActionEnum(String code, Class domainClass) {
