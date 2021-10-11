@@ -70,19 +70,6 @@ public class SysLoginService
 
         // 查询用户信息
         SysUser user = userService.selectUserByLoginName(username);
-
-        /**
-        if (user == null && maybeMobilePhoneNumber(username))
-        {
-            user = userService.selectUserByPhoneNumber(username);
-        }
-
-        if (user == null && maybeEmail(username))
-        {
-            user = userService.selectUserByEmail(username);
-        }
-        */
-
         if (user == null)
         {
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.not.exists")));
@@ -108,6 +95,45 @@ public class SysLoginService
         return user;
     }
 
+    /**
+     * 登录app
+     */
+    public SysUser loginApp(String username)
+    {
+        // 用户名或密码为空 错误
+        if (StringUtils.isEmpty(username))
+        {
+            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("not.null")));
+            throw new UserNotExistsException();
+        }
+        // 用户名不在指定范围内 错误
+        if (username.length() < UserConstants.USERNAME_MIN_LENGTH
+                || username.length() > UserConstants.USERNAME_MAX_LENGTH)
+        {
+            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.password.not.match")));
+            throw new UserPasswordNotMatchException();
+        }
+
+        // 查询用户信息
+        SysUser user = userService.selectUserByLoginName(username);
+
+        if (user == null)
+        {
+            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.not.exists")));
+            throw new UserNotExistsException();
+        }
+        if (UserStatus.DISABLE.getCode().equals(user.getStatus()))
+        {
+            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.blocked", user.getRemark())));
+            throw new UserBlockedException();
+        }
+
+        passwordService.validate(user, "8e6d98b90472783cc73c17047ddccf36");
+
+        AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success")));
+        recordLoginInfo(user.getUserId());
+        return user;
+    }
     /**
     private boolean maybeEmail(String username)
     {

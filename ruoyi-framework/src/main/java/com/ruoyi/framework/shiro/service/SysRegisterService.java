@@ -1,5 +1,7 @@
 package com.ruoyi.framework.shiro.service;
 
+import com.ruoyi.common.core.domain.entity.SysRole;
+import com.ruoyi.system.service.impl.SysRoleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -15,6 +17,9 @@ import com.ruoyi.framework.manager.AsyncManager;
 import com.ruoyi.framework.manager.factory.AsyncFactory;
 import com.ruoyi.system.service.ISysUserService;
 
+import javax.management.relation.Role;
+import java.util.List;
+
 /**
  * 注册校验方法
  * 
@@ -28,6 +33,8 @@ public class SysRegisterService
 
     @Autowired
     private SysPasswordService passwordService;
+    @Autowired
+    private SysRoleServiceImpl sysRoleServiceImpl;
 
     /**
      * 注册
@@ -80,4 +87,45 @@ public class SysRegisterService
         }
         return msg;
     }
+    /**
+     * 手机APP注册
+     * 手机APP用户只有手机号码无其他信息
+     */
+    public String registerAppAcc(String phone)
+    {
+        SysUser user=new SysUser ( );
+        //设置默认密码，因手机用户不会登陆中台，登陆APP也不需要密码，可写死
+        String msg = "", loginName = phone, password = "admin123";
+        if (UserConstants.USER_NAME_NOT_UNIQUE.equals(userService.checkLoginNameUnique(loginName)))
+        {
+            msg = "保存用户'" + loginName + "'失败，注册账号已存在";
+        }
+        else
+        {
+            user.setLoginName (phone);
+            user.setPwdUpdateDate(DateUtils.getNowDate());
+            user.setUserName("手机APP用户");
+            user.setSalt(ShiroUtils.randomSalt());
+            user.setPhonenumber (phone);
+            user.setRemark ( "手机APP用户" );
+            /*SysRole r=new SysRole();
+            r.setRoleKey ("tourist");
+            List<SysRole> selectRoleList=sysRoleServiceImpl.selectRoleList (  )
+            if (!selectRoleList.isEmpty ()) {
+                user.setDeptId ( selectRoleList.get ( 0 ).getRoleId () );
+            }*/
+            user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
+            boolean regFlag = userService.registerUser(user);
+            if (!regFlag)
+            {
+                msg = "注册失败,请联系系统管理人员";
+            }
+            else
+            {
+                AsyncManager.me().execute(AsyncFactory.recordLogininfor(loginName, Constants.REGISTER, MessageUtils.message("user.register.success")));
+            }
+        }
+        return msg;
+    }
+
 }

@@ -97,7 +97,11 @@ public class UserRealm extends AuthorizingRealm
         SysUser user = null;
         try
         {
-            user = loginService.login(username, password);
+            if("AUTO".equals (upToken.getHost ())){
+                user = loginService.loginApp (username);
+            }else{
+                user = loginService.login(username, password);
+            }
         }
         catch (CaptchaException e)
         {
@@ -125,13 +129,12 @@ public class UserRealm extends AuthorizingRealm
         }
         catch (Exception e)
         {
-            log.info("对用户[" + username + "]进行登录验证..验证未通过{}", e.getMessage());
+            log.info("对用户[" + username + "]进行登录验证..验证未通过{}", e.getMessage(),e);
             throw new AuthenticationException(e.getMessage(), e);
         }
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, password, getName());
         return info;
     }
-
     /**
      * 清理指定用户授权信息缓存
      */

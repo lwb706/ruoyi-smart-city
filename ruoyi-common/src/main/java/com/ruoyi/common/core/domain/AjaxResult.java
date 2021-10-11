@@ -114,7 +114,15 @@ public class AjaxResult extends HashMap<String, Object>
     {
         return AjaxResult.success("操作成功", data);
     }
-
+    /**
+     * 返回失败数据
+     *
+     * @return 失败消息
+     */
+    public static AjaxResult error(Object data)
+    {
+        return AjaxResult.error("操作失败", data);
+    }
     /**
      * 返回成功消息
      *

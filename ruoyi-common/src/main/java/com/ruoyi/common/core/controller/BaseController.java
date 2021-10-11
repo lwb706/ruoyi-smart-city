@@ -160,13 +160,19 @@ public class BaseController
     {
         return AjaxResult.success(message);
     }
-
     /**
      * 返回成功数据
      */
     public static AjaxResult success(Object data)
     {
         return AjaxResult.success("操作成功", data);
+    }
+    /**
+     * 返回失败数据
+     */
+    public static AjaxResult error(Object data)
+    {
+        return AjaxResult.error("操作失败", data);
     }
 
     /**

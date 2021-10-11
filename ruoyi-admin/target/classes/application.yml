@@ -137,3 +137,13 @@ xss:
 swagger:
   # 是否开启swagger
   enabled: true
+
+#短信验证码https请求地址
+  # https://www.ushance.com/web/index/app/send.json
+  # 参数
+  # phone=18842897729
+  #code=122344
+smsHttps:
+    # url地址
+  okhttpUrl: https://www.baidu.com
+    #  okhttpUrl: https://www.ushance.com/web/index/app/send.json
