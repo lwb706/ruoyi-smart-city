@@ -9,16 +9,5 @@ package com.ruoyi.goods.domain;
  */
 public class BaseDomain {
 
-    /**
-     * 操作类型
-     */
-    private String operType;
 
-    public String getOperType() {
-        return operType;
-    }
-
-    public void setOperType(String operType) {
-        this.operType = operType;
-    }
 }

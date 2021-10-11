@@ -1,8 +1,15 @@
 package com.ruoyi.goods.manage.service.impl;
 
+import com.ruoyi.goods.base.enums.OperTypeEnum;
 import com.ruoyi.goods.domain.Goods;
+import com.ruoyi.goods.manage.mapper.GoodsMessageMapper;
 import com.ruoyi.goods.manage.service.GoodsManageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * CLASS_NAME
@@ -13,11 +20,66 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class GoodsManageServiceImpl implements GoodsManageService {
+
+    @Autowired
+    private GoodsMessageMapper goodsMessageMapper;
+
     @Override
     public <T> T actionRequest(Object obj,String operType) {
-        //TODO 根据操作类型进入到不同的实现里面，增、删、改、查可以共用一个实现类
+        switch (OperTypeEnum.getOperTypeEnum(operType)) {
+            case ADD:
+                addGoods(obj);
+                break;
+            case UPDATE:
+                updateGoods(obj);
+                break;
+            case DELETE:
+                deleteGoods(obj);
+                break;
+            case QUERY:
+                return (T) queryGoodsList(obj);
+            default:
+                break;
+        }
+        return null;
+    }
+
+    /**
+     * 管理端新增商品信息
+     */
+    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
+    private void addGoods(Object obj){
         Goods goods = (Goods) obj;
-        System.out.println("获取到的对象为：" + goods);
-        return (T) goods;
+        goodsMessageMapper.insertGoods(goods);
+    }
+
+    /**
+     * 管理端修改商品信息
+     * @param obj
+     */
+    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
+    private void updateGoods(Object obj){
+        Goods goods = (Goods) obj;
+        goodsMessageMapper.updateGoods(goods);
+    }
+
+    /**
+     * 删除商品信息
+     * @param obj
+     */
+    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
+    private void deleteGoods(Object obj){
+        String id = (String) obj;
+        goodsMessageMapper.deleteGoods(id);
+    }
+
+    /**
+     * 查询商品信息列表
+     * @param obj
+     * @return
+     */
+    private List<Goods> queryGoodsList(Object obj){
+        Goods goods = (Goods) obj;
+        return goodsMessageMapper.queryGoodsList(goods);
     }
 }

@@ -27,7 +27,7 @@ public class Goods extends BaseDomain{
     /**
      * 轮播图
      */
-    private String rotationPicture;
+    private String carousel;
 
     /**
      * 排列序号
@@ -42,7 +42,7 @@ public class Goods extends BaseDomain{
     /**
      * 富文本
      */
-    private String richText;
+    private String richTextId;
 
     /**
      * 商品类型
@@ -55,9 +55,14 @@ public class Goods extends BaseDomain{
     private String commodityName;
 
     /**
-     * 库存
+     * 剩余总数
      */
-    private int stock;
+    private int sum;
+
+    /**
+     * 卖出数量
+     */
+    private int sell;
 
     /**
      * 商品价格
@@ -67,7 +72,7 @@ public class Goods extends BaseDomain{
     /**
      * 折扣价格
      */
-    private int disPrice;
+    private int discount;
 
     /**
      * 限定个数
@@ -78,6 +83,16 @@ public class Goods extends BaseDomain{
      * 商品描述
      */
     private String commodityDesc;
+
+    /**
+     * 图文详情
+     */
+    private String detail;
+
+    /**
+     * json
+     */
+    private String json;
 
     /**
      * 购买开始时间
@@ -113,20 +128,12 @@ public class Goods extends BaseDomain{
         this.type = type;
     }
 
-    public String getCommodityName() {
-        return commodityName;
+    public String getCarousel() {
+        return carousel;
     }
 
-    public void setCommodityName(String commodityName) {
-        this.commodityName = commodityName;
-    }
-
-    public String getRotationPicture() {
-        return rotationPicture;
-    }
-
-    public void setRotationPicture(String rotationPicture) {
-        this.rotationPicture = rotationPicture;
+    public void setCarousel(String carousel) {
+        this.carousel = carousel;
     }
 
     public int getNum() {
@@ -145,12 +152,12 @@ public class Goods extends BaseDomain{
         this.showPicture = showPicture;
     }
 
-    public String getRichText() {
-        return richText;
+    public String getRichTextId() {
+        return richTextId;
     }
 
-    public void setRichText(String richText) {
-        this.richText = richText;
+    public void setRichTextId(String richTextId) {
+        this.richTextId = richTextId;
     }
 
     public String getCommodityType() {
@@ -161,12 +168,28 @@ public class Goods extends BaseDomain{
         this.commodityType = commodityType;
     }
 
-    public int getStock() {
-        return stock;
+    public String getCommodityName() {
+        return commodityName;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setCommodityName(String commodityName) {
+        this.commodityName = commodityName;
+    }
+
+    public int getSum() {
+        return sum;
+    }
+
+    public void setSum(int sum) {
+        this.sum = sum;
+    }
+
+    public int getSell() {
+        return sell;
+    }
+
+    public void setSell(int sell) {
+        this.sell = sell;
     }
 
     public int getPrice() {
@@ -177,12 +200,12 @@ public class Goods extends BaseDomain{
         this.price = price;
     }
 
-    public int getDisPrice() {
-        return disPrice;
+    public int getDiscount() {
+        return discount;
     }
 
-    public void setDisPrice(int disPrice) {
-        this.disPrice = disPrice;
+    public void setDiscount(int discount) {
+        this.discount = discount;
     }
 
     public int getLimit() {
@@ -199,6 +222,22 @@ public class Goods extends BaseDomain{
 
     public void setCommodityDesc(String commodityDesc) {
         this.commodityDesc = commodityDesc;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public String getJson() {
+        return json;
+    }
+
+    public void setJson(String json) {
+        this.json = json;
     }
 
     public String getTradeStartDate() {
@@ -223,16 +262,20 @@ public class Goods extends BaseDomain{
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", type=" + type +
-                ", rotationPicture='" + rotationPicture + '\'' +
+                ", carousel='" + carousel + '\'' +
                 ", num=" + num +
                 ", showPicture='" + showPicture + '\'' +
-                ", richText='" + richText + '\'' +
+                ", richText='" + richTextId + '\'' +
                 ", commodityType='" + commodityType + '\'' +
-                ", stock=" + stock +
+                ", commodityName='" + commodityName + '\'' +
+                ", sum=" + sum +
+                ", sell=" + sell +
                 ", price=" + price +
-                ", disPrice=" + disPrice +
+                ", disPrice=" + discount +
                 ", limit=" + limit +
                 ", commodityDesc='" + commodityDesc + '\'' +
+                ", detail='" + detail + '\'' +
+                ", json='" + json + '\'' +
                 ", tradeStartDate='" + tradeStartDate + '\'' +
                 ", tradeEndDate='" + tradeEndDate + '\'' +
                 '}';

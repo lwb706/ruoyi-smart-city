@@ -1,5 +1,8 @@
 package com.ruoyi.goods.base.enums;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum OperTypeEnum {
 
     ADD("ADD","新增"),
@@ -11,6 +14,18 @@ public enum OperTypeEnum {
     private String code;
 
     private String name;
+
+    private static Map<String, OperTypeEnum> OPERMAP = new HashMap<>();
+
+    static {
+        for(OperTypeEnum operTypeEnum : values()){
+            OPERMAP.put(operTypeEnum.code, operTypeEnum);
+        }
+    }
+
+    public static OperTypeEnum getOperTypeEnum(String code){
+        return OPERMAP.get(code);
+    }
 
     OperTypeEnum(String code, String name) {
         this.code = code;
