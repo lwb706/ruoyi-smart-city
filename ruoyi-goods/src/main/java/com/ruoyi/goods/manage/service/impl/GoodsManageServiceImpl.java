@@ -1,5 +1,6 @@
 package com.ruoyi.goods.manage.service.impl;
 
+import com.ruoyi.common.utils.uuid.IdUtils;
 import com.ruoyi.goods.base.enums.OperTypeEnum;
 import com.ruoyi.goods.domain.Goods;
 import com.ruoyi.goods.manage.mapper.GoodsMessageMapper;
@@ -50,6 +51,8 @@ public class GoodsManageServiceImpl implements GoodsManageService {
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     private void addGoods(Object obj){
         Goods goods = (Goods) obj;
+        //生成唯一ID
+        goods.setId(IdUtils.fastSimpleUUID());
         goodsMessageMapper.insertGoods(goods);
     }
 
