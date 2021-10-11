@@ -32,7 +32,7 @@ public class GoodsManageController extends BaseController{
 
 
     /**
-     * app Action请求接口
+     * manage Action请求接口
      * @param request
      * @param response
      * @return
