@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.goods.app.mapper.GoodsPlaceOrderMapper">
+
+    <resultMap id="goodsOrderMap" type="com.ruoyi.goods.domain.GoodsOrder">
+        <result column="ID" jdbcType="VARCHAR" property="id" />
+        <result column="PRICE" jdbcType="BIGINT" property="price" />
+        <result column="PAY" jdbcType="BIGINT" property="pay" />
+        <result column="SUM" jdbcType="INTEGER" property="sum" />
+        <result column="SHOP_ID" jdbcType="VARCHAR" property="commodityId" />
+        <result column="ORDER_STATUS" jdbcType="VARCHAR" property="orderStatus" />
+        <result column="TYPE" jdbcType="VARCHAR" property="type" />
+        <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+        <result column="CREATE_DATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="JSON" jdbcType="VARCHAR" property="json" />
+        <result column="PAY_TIME" jdbcType="TIMESTAMP" property="payTime" />
+        <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+        <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    </resultMap>
+
+    <sql id="column_list">
+        ID,
+        PRICE,
+        PAY,
+        SUM,
+        SHOP_ID,
+        ORDER_STATUS,
+        TYPE,
+        USER_ID,
+        JSON,
+        ADDRESS,
+        PHONE
+    </sql>
+
+    <insert id="insertGoodsOrder" parameterType="com.ruoyi.goods.domain.GoodsOrder">
+        INSERT INTO tongyu_shoporder (<include refid="column_list"/>)
+        VALUES(
+        #{id,jdbcType=VARCHAR},
+        #{price,jdbcType=BIGINT},
+        #{pay,jdbcType=BIGINT},
+        #{sum,jdbcType=INTEGER},
+        #{commodityId,jdbcType=VARCHAR},
+        #{orderStatus,jdbcType=VARCHAR},
+        #{type,jdbcType=VARCHAR},
+        #{userId,jdbcType=VARCHAR},
+        #{json,jdbcType=VARCHAR},
+        #{address,jdbcType=VARCHAR},
+        #{phone,jdbcType=VARCHAR}
+        )
+    </insert>
+    <update id="updateGoodsOrder" parameterType="com.ruoyi.goods.domain.GoodsOrder">
+        update tongyu_shoporder
+        <set>
+            <trim suffixOverrides=",">
+                <if test="price != null and price >= 0 ">
+                    PRICE = #{price,jdbcType=BIGINT},
+                </if>
+                <if test="pay != null and pay >= 0 ">
+                    PAY = #{pay,jdbcType=BIGINT},
+                </if>
+                <if test="sum != null and sum >= 0 ">
+                    SUM = #{sum,jdbcType=BIGINT},
+                </if>
+                <if test="commodityId != null and commodityId != ''">
+                    SHOP_ID = #{commodityId,jdbcType=VARCHAR},
+                </if>
+                <if test="orderStatus != null and orderStatus != ''">
+                    ORDER_STATUS = #{orderStatus,jdbcType=VARCHAR},
+                </if>
+                <if test="type != null and type != ''">
+                    TYPE = #{type,jdbcType=VARCHAR},
+                </if>
+                <if test="userId != null and userId != ''">
+                    USER_ID = #{userId,jdbcType=VARCHAR},
+                </if>
+                <if test="json != null and json != ''">
+                    JSON = #{json,jdbcType=VARCHAR},
+                </if>
+                <if test="address != null and address != ''">
+                    ADDRESS = #{address,jdbcType=VARCHAR},
+                </if>
+                <if test="phone != null and phone != ''">
+                    PHONE = #{phone,jdbcType=VARCHAR}
+                </if>
+            </trim>
+        </set>
+        WHERE
+        ID = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="deleteGoodsOrder" parameterType="java.lang.String" >
+        DELETE FROM tongyu_shoporder WHERE ID = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <select id="queryGoodsOrderList" parameterType="com.ruoyi.goods.domain.GoodsOrder" resultMap="goodsOrderMap">
+        SELECT <include refid="column_list"/>
+        FROM tongyu_shoporder
+        <where>
+            <if test="id != null and id != ''" >
+                and ID = #{id,jdbcType=VARCHAR}
+            </if>
+            <if test="userId != null and userId != ''">
+               and USER_ID = #{userId,jdbcType=VARCHAR}
+            </if>
+            <if test="commodityId != null and commodityId != ''">
+                and SHOP_ID = #{commodityId,jdbcType=VARCHAR}
+            </if>
+            <if test="orderStatus != null and orderStatus != ''">
+                and ORDER_STATUS = #{orderStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="type != null and type != ''">
+                and TYPE = #{type,jdbcType=VARCHAR}
+            </if>
+            <if test="phone != null and phone != ''">
+                and PHONE = #{phone,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+</mapper>

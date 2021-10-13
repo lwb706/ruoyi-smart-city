@@ -1,5 +1,8 @@
 package com.ruoyi.goods.domain;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 /**
  * CLASS_NAME
  * DESCRIPTION 商品订单信息
@@ -25,6 +28,11 @@ public class GoodsOrder {
     private String commodityName;
 
     /**
+     * 类型；普通商品，门票
+     */
+    private String type;
+
+    /**
      * 商品规格(json格式)
      */
     private String specifications;
@@ -33,6 +41,11 @@ public class GoodsOrder {
      * 总计价格：分(无小数位)
      */
     private long price;
+
+    /**
+     * 订单状态
+     */
+    private String orderStatus;
 
     /**
      * 支付价格：分(无小数位)
@@ -45,6 +58,11 @@ public class GoodsOrder {
     private int sum;
 
     /**
+     * 用户ID
+     */
+    private String userId;
+
+    /**
      * 地址
      */
     private String address;
@@ -53,6 +71,18 @@ public class GoodsOrder {
      * 手机号码
      */
     private String phone;
+
+    /**
+     * 创建时间
+     */
+    private Timestamp createTime;
+
+    /**
+     * 支付时间
+     */
+    private Timestamp payTime;
+
+    private String json;
 
     public String getId() {
         return id;
@@ -126,18 +156,72 @@ public class GoodsOrder {
         this.phone = phone;
     }
 
+    public Timestamp getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
+    }
+
+    public Timestamp getPayTime() {
+        return payTime;
+    }
+
+    public void setPayTime(Timestamp payTime) {
+        this.payTime = payTime;
+    }
+
+    public String getJson() {
+        return json;
+    }
+
+    public void setJson(String json) {
+        this.json = json;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
     @Override
     public String toString() {
         return "GoodsOrder{" +
                 "id='" + id + '\'' +
                 ", commodityId='" + commodityId + '\'' +
                 ", commodityName='" + commodityName + '\'' +
+                ", type='" + type + '\'' +
                 ", specifications='" + specifications + '\'' +
                 ", price=" + price +
+                ", orderStatus='" + orderStatus + '\'' +
                 ", pay=" + pay +
                 ", sum=" + sum +
+                ", userId='" + userId + '\'' +
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
+                ", createTime=" + createTime +
+                ", payTime=" + payTime +
+                ", json='" + json + '\'' +
                 '}';
     }
 }

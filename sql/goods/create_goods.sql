@@ -29,9 +29,15 @@ CREATE TABLE `tongyu_shoporder` (
   `pay` bigint DEFAULT NULL COMMENT '支付价格：分',
   `sum` int DEFAULT NULL COMMENT '购买总数',
   `shop_id` varchar(50) DEFAULT NULL COMMENT '商品id',
-  `type` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '类型；普通商品，门票',
+  `order_status` varchar(50) DEFAULT NULL COMMENT '订单状态',
+  `type` varchar(50)  DEFAULT NULL COMMENT '类型；普通商品，门票',
   `user_id` varchar(50) DEFAULT NULL COMMENT '下单人id',
-  `createTime` datetime DEFAULT NULL COMMENT '创建时间',
+  `json` json DEFAULT NULL,
+  `payTime` datetime DEFAULT NULL COMMENT '支付时间',
+  `address` varchar(255) DEFAULT NULL COMMENT '地址',
+  `phone` varchar(50) DEFAULT NULL COMMENT '用户手机',
+  `create_date_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `pay_Time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 comment = '商品订单表';
 
