@@ -75,15 +75,16 @@ insert into sys_dict_data values(30, 3,  '新闻',     '3',       'sys_notice_ty
 --新闻表
 drop table if exists tongyu_news;
 CREATE TABLE tongyu_news (
-  news_Id varchar(50) NOT NULL auto_increment,
+  news_Id bigint(50) NOT NULL auto_increment,
   title  varchar(100)  COMMENT '标题',
   type   char(1)         not null COMMENT '类型  1：主页置顶新闻  2：信息列表新闻',
   carousel_Name   varchar(1000)   COMMENT '轮播图名称',
   thumbnail_Name  varchar(1000)   COMMENT '缩略图名称',
-  details        varchar(1000)   COMMENT '新闻详情富文本文件名称',
+  details        varchar(2000)   COMMENT '新闻详情富文本文件名称',
   create_time       datetime     comment '创建时间',
   ready_Number       	 bigint(20)		 comment '阅读量',
   collection_Number   bigint(20) 		 comment '收藏人数',
   create_by         varchar(64)     default ''                 comment '创建者',
+	update_time       datetime     comment '更新时间',
   PRIMARY KEY (`news_Id`)
 ) ENGINE=InnoDB auto_increment=100 comment = '新闻资讯表';

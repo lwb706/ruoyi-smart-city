@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.goods.manage.mapper.SysNewsMapper">
+
+    <resultMap id="newsMap" type="com.ruoyi.goods.domain.News">
+        <result column="NEW_ID" jdbcType="BIGINT" property="newId" />
+        <result column="TITLE" jdbcType="VARCHAR" property="title" />
+        <result column="TYPE" jdbcType="VARCHAR" property="type" />
+        <result column="carousel_Name" jdbcType="VARCHAR" property="carouselName" />
+        <result column="thumbnail_Name" jdbcType="VARCHAR" property="thumbnailName" />
+        <result column="DETAILS" jdbcType="VARCHAR" property="details" />
+        <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+        <result column="ready_Number" jdbcType="BIGINT" property="readyNumber" />
+        <result column="collection_Number" jdbcType="BIGINT" property="collectionNumber" />
+        <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    </resultMap>
+
+    <sql id="column_list">
+        NEW_ID,
+        TITLE,
+        TYPE,
+        carousel_Name,
+        thumbnail_Name,
+        DETAILS,
+        create_time,
+        DETAIL,
+        ready_Number,
+        collection_Number,
+        create_by
+    </sql>
+    <insert id="insertNews" parameterType="com.ruoyi.goods.domain.News">
+        insert into tongyu_news (
+        <if test="title != null and title != '' ">title, </if>
+        <if test="type != null and type != '' ">type, </if>
+        <if test="carouselName != null and carouselName != '' ">carousel_Name, </if>
+        <if test="thumbnailName != null and thumbnailName != '' ">thumbnail_Name, </if>
+        <if test="details != null and details != ''">details,</if>
+        <if test="createBy != null and createBy != ''">create_by,</if>
+        ready_Number,
+        collection_Number,
+        create_time
+        )values(
+        <if test="title != null and title != ''">#{title}, </if>
+        <if test="type != null and type != ''">#{type}, </if>
+        <if test="carouselName != null and carouselName != ''">#{carouselName}, </if>
+        <if test="thumbnailName != null and thumbnailName != ''">#{thumbnailName}, </if>
+        <if test="details != null and details != ''">#{details},</if>
+        <if test="createBy != null and createBy != ''">#{createBy},</if>
+        0,
+        0,
+        sysdate()
+        )
+    </insert>
+    <select id="selectNewsList" parameterType="SysNotice" resultMap="newsMap">
+        select news_Id,title,carousel_Name,thumbnail_Name,details,create_time,ready_Number,collection_Number,create_by
+        FROM tongyu_news
+        <where>
+            <if test="title != null and title != ''">
+                AND title like concat('%', #{title}, '%')
+            </if>
+            <if test="type != null and type != ''">
+                AND type = #{type}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateNews" parameterType="SysNotice">
+        update tongyu_news
+        <set>
+            <if test="title != null and title != ''">title = #{title}, </if>
+            <if test="type != null and type != ''">type = #{type}, </if>
+            <if test="carouselName != null">carousel_Name = #{carouselName}, </if>
+            <if test="details != null and details != ''">details = #{details}, </if>
+            <if test="thumbnailName != null and thumbnailName != ''">thumbnail_Name = #{thumbnailName},</if>
+            update_time = sysdate()
+        </set>
+        where news_id = #{newsId}
+    </update>
+
+    <delete id="deleteNewsById" parameterType="java.lang.String">
+        delete from tongyu_news where news_Id =#{newsId}
+    </delete>
+</mapper>
