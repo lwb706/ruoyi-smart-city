@@ -40,7 +40,7 @@
         #{carousel,jdbcType=VARCHAR},
         #{detail,jdbcType=VARCHAR},
         #{richTextId,jdbcType=VARCHAR},
-        #{json,jdbcType=VARCHAR},
+        #{json,jdbcType=VARCHAR}
         )
     </insert>
     <update id="updateGoods" parameterType="com.ruoyi.goods.domain.Goods">
@@ -72,7 +72,7 @@
                     RICHTEXT_ID = #{richTextId,jdbcType=VARCHAR},
                 </if>
                 <if test="json != null and json != ''">
-                    JSON = #{json,jdbcType=VARCHAR},
+                    JSON = #{json,jdbcType=VARCHAR}
                 </if>
             </trim>
         </set>
@@ -92,7 +92,7 @@
                 and ID = #{id,jdbcType=VARCHAR},
             </if>
             <if test="commodityName != null and commodityName != ''">
-               and NAME = #{commodityName,jdbcType=VARCHAR},
+               and NAME = #{commodityName,jdbcType=VARCHAR}
             </if>
         </where>
     </select>

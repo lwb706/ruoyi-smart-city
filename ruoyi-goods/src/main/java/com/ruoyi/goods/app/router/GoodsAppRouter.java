@@ -2,8 +2,6 @@ package com.ruoyi.goods.app.router;
 
 import com.ruoyi.goods.app.constants.GoodsAppConstants;
 import com.ruoyi.goods.app.service.GoodsAppService;
-import com.ruoyi.goods.app.service.impl.GoodsAppServiceImpl;
-import com.ruoyi.goods.app.service.impl.Test2ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

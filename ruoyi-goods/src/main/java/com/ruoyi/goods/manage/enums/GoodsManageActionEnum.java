@@ -13,7 +13,8 @@ import com.ruoyi.goods.manage.constants.GoodsManageConstants;
  */
 public enum GoodsManageActionEnum {
 
-    GOODS0023(GoodsManageConstants.GOODS0023, Goods.class, OperTypeEnum.ADD.getCode());
+    GOODS0023(GoodsManageConstants.GOODS0023, Goods.class, OperTypeEnum.ADD.getCode()),
+    GOODS0028(GoodsManageConstants.GOODS0028, Goods.class, OperTypeEnum.UPDATE.getCode());
 
 
     GoodsManageActionEnum(String code, Class domainClass, String operType) {

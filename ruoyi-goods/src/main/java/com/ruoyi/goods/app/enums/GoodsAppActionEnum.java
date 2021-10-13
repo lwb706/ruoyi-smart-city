@@ -1,7 +1,8 @@
 package com.ruoyi.goods.app.enums;
 
 import com.ruoyi.goods.app.constants.GoodsAppConstants;
-import com.ruoyi.goods.domain.NoticeParam;
+import com.ruoyi.goods.domain.Goods;
+import com.ruoyi.goods.domain.GoodsOrder;
 
 /**
  * CLASS_NAME
@@ -13,7 +14,11 @@ import com.ruoyi.goods.domain.NoticeParam;
 public enum GoodsAppActionEnum {
 
     GOODS0001(GoodsAppConstants.GOODS0001, Object.class),
-    GOODS0005(GoodsAppConstants.GOODS0005, NoticeParam.class);
+    GOODS0002(GoodsAppConstants.GOODS0002, Object.class),
+
+
+    GOODS0012(GoodsAppConstants.GOODS0012, GoodsOrder.class),
+    GOODS0015(GoodsAppConstants.GOODS0015, GoodsOrder.class);
 
 
     GoodsAppActionEnum(String code, Class domainClass) {
