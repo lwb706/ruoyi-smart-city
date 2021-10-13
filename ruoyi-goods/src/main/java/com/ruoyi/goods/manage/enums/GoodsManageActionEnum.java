@@ -18,6 +18,7 @@ public enum GoodsManageActionEnum {
     GOODS0024(GoodsManageConstants.GOODS0024, Goods.class, OperTypeEnum.QUERY.getCode()),
     GOODS0025(GoodsManageConstants.GOODS0025, Goods.class, OperTypeEnum.UPDATE.getCode()),
     GOODS0026(GoodsManageConstants.GOODS0026, Goods.class, OperTypeEnum.QUERY.getCode()),
+    GOODS0027(GoodsManageConstants.GOODS0027, GoodsOrder.class, OperTypeEnum.QUERY.getCode()),
     GOODS0028(GoodsManageConstants.GOODS0028, GoodsOrder.class, OperTypeEnum.UPDATE.getCode());
 
 
