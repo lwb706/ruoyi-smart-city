@@ -1,10 +1,8 @@
 package com.ruoyi.goods.manage.service.impl;
 
-import com.ruoyi.common.utils.uuid.IdUtils;
 import com.ruoyi.goods.app.mapper.GoodsPlaceOrderMapper;
 import com.ruoyi.goods.base.enums.OperTypeEnum;
 import com.ruoyi.goods.base.enums.OrderStatusEnum;
-import com.ruoyi.goods.domain.Goods;
 import com.ruoyi.goods.domain.GoodsOrder;
 import com.ruoyi.goods.manage.mapper.GoodsMessageMapper;
 import com.ruoyi.goods.manage.service.GoodsManageService;
