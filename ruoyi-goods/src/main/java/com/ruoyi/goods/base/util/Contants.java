@@ -21,6 +21,8 @@ public class Contants {
      public static  final  String  PHONE_NULBER_FAIL="GOODS1006";
      /*登陆失败*/
      public static  final  String  LOGIN_FAIL="GOODS1007";
+     /*用户未登录*/
+     public static  final  String  LOGIN_NONE="GOODS1008";
 
 
 

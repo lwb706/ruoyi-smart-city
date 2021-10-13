@@ -52,3 +52,32 @@ CREATE TABLE `tongyu_shoptype` (
   `recommend` varchar(20) DEFAULT NULL COMMENT '是否推荐',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3   comment = '商品分类表';
+
+
+--20211011 add by
+-- 公告用户阅读记录表记录阅读过公告的账户
+drop table if exists sys_notice_ready;
+create table sys_notice_ready (
+  id int(10) NOT NULL  auto_increment,
+  notice_id         int(10)          not null     comment '公告ID',
+  notice_ReadName      varchar(50)     not null                   comment '阅读账号名',
+  create_time         datetime                                   comment '阅读时间',
+  primary key (id)
+) engine=innodb auto_increment=100  comment = '公告用户阅读记录表';
+
+insert into sys_dict_data values(30, 3,  '新闻',     '3',       'sys_notice_type',     '',   'success', 'N', '0', 'admin', sysdate(), '', null, '公告');
+--新闻表
+drop table if exists tongyu_news;
+CREATE TABLE tongyu_news (
+  news_Id varchar(50) NOT NULL auto_increment,
+  title  varchar(100)  COMMENT '标题',
+  type   char(1)         not null COMMENT '类型  1：主页置顶新闻  2：信息列表新闻',
+  carousel_Name   varchar(1000)   COMMENT '轮播图名称',
+  thumbnail_Name  varchar(1000)   COMMENT '缩略图名称',
+  details        varchar(1000)   COMMENT '新闻详情富文本文件名称',
+  create_time       datetime     comment '创建时间',
+  ready_Number       	 bigint(20)		 comment '阅读量',
+  collection_Number   bigint(20) 		 comment '收藏人数',
+  create_by         varchar(64)     default ''                 comment '创建者',
+  PRIMARY KEY (`news_Id`)
+) ENGINE=InnoDB auto_increment=100 comment = '新闻资讯表';

@@ -61,7 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			sysdate()
 		)
     </insert>
-	 
+
     <update id="updateNotice" parameterType="SysNotice">
         update sys_notice 
         <set>
@@ -81,5 +81,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{noticeId}
         </foreach>
     </delete>
-    
+    <insert id="insertNoticeReady" parameterType="SysNotice">
+        insert into sys_notice_ready (
+        <if test="noticeId != null ">notice_id, </if>
+        <if test="noticeReadName != null and noticeReadName != '' ">notice_ReadName, </if>
+        create_time
+        )values(
+        <if test="noticeId != null and noticeId != ''">#{noticeId}, </if>
+        <if test="noticeReadName != null and noticeReadName != ''">#{noticeReadName}, </if>
+        sysdate()
+        )
+    </insert>
+
+    <select id="selectNoticeNoRead" parameterType="SysNotice" resultMap="SysNoticeResult">
+        SELECT notice_id, notice_title, notice_type, notice_content, status, create_by, create_time, update_by, update_time, remark,read_flag
+        FROM (
+		select a.notice_id, a.notice_title, a.notice_type, a.notice_content, a.status, a.create_by, a.create_time, a.update_by, a.update_time,
+		 a.remark,a.notice_id IN (SELECT notice_id FROM sys_notice_ready WHERE notice_ReadName = #{noticeReadName}) AS read_flag
+        FROM sys_notice a
+        )	b
+				where b.read_flag=0
+        <if test="noticeType != null and noticeType != 0">
+            AND notice_type = #{noticeType}
+        </if>
+    </select>
 </mapper>

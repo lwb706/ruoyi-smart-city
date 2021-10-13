@@ -295,6 +295,11 @@ public class ShiroConfig
         filterChainDefinitionMap.put("/goods/login", "anon,captchaValidate");
         filterChainDefinitionMap.put("/goods/smsCode", "anon,captchaValidate");
         filterChainDefinitionMap.put("/goods/registerAppAcc", "anon,captchaValidate");
+        filterChainDefinitionMap.put("/goods/app", "anon,captchaValidate");
+/*
+        filterChainDefinitionMap.put("/goods/smsCode22", "anon,captchaValidate");
+*/
+
 
 
         // 注册相关
