@@ -23,7 +23,8 @@ public class Contants {
      public static  final  String  LOGIN_FAIL="GOODS1007";
      /*用户未登录*/
      public static  final  String  LOGIN_NONE="GOODS1008";
-
+     /*文件上传失败*/
+     public static  final  String  FAIL_UPLOAD_FILE="GOODS1009";
 
 
 }

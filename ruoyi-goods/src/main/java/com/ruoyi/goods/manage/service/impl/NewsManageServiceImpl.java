@@ -1,11 +1,11 @@
 package com.ruoyi.goods.manage.service.impl;
 
+import com.ruoyi.common.config.RuoYiConfig;
+import com.ruoyi.common.constant.Constants;
+import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.goods.app.mapper.GoodsPlaceOrderMapper;
-import com.ruoyi.goods.app.service.GoodsAppService;
+import com.ruoyi.common.utils.uuid.IdUtils;
 import com.ruoyi.goods.base.enums.OperTypeEnum;
-import com.ruoyi.goods.base.enums.OrderStatusEnum;
-import com.ruoyi.goods.domain.GoodsOrder;
 import com.ruoyi.goods.domain.News;
 import com.ruoyi.goods.manage.mapper.SysNewsMapper;
 import com.ruoyi.goods.manage.service.GoodsManageService;
@@ -14,15 +14,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,10 +31,8 @@ public class NewsManageServiceImpl implements GoodsManageService {
     private SysNewsMapper newsMapper;
     private final static Logger logger = LoggerFactory
             .getLogger(NewsManageServiceImpl.class);
-    @Value("${goodsPath.imgageTxtFPath}")
-    private String imagePath;
     @Override
-    public <T> T actionRequest ( Object obj ,String operType) {
+    public <T> T actionRequest (Object obj ,String operType) {
         switch (OperTypeEnum.getOperTypeEnum(operType)) {
             case ADD:
                 insertNews(obj);
@@ -98,35 +94,46 @@ public class NewsManageServiceImpl implements GoodsManageService {
         return newsList;
     }
     public String handleImg(String imgStr)  {
+        //String dirPath = url + "newsUpload" + File.separatorChar;
         List<String> imgList=getImgSrc ( imgStr );
         String resultStr=imgStr;
         for (int i = 0; i <imgList.size () ; i++) {
             String str=imgList.get (i);
             String imgPic=str.replace ("data:image/png;base64,","" );
             //System.err.println ("返回结果-----------"+str2);
-            String fineName=String.valueOf (new Date ().getTime ());
-            uploads(imgPic,fineName);//转成图片
-            resultStr=resultStr.replace (imgPic, "/".concat ( fineName ) );//将图片替换
-            //System.err.println ("返回结果resultStr-----------"+resultStr);
+            //String fineName=String.valueOf (new Date ().getTime ());
+            String fileName=uploads(imgPic);//转成图片
+            resultStr=resultStr.replace (imgPic, fileName);//将图片替换
+           // resultStr=resultStr.replace (imgPic, imagePath.concat ("/").concat (fineName).concat ( ".jpg" ) );//将图片替换
         }
         return resultStr;
     }
 
-    public String uploads(String imgStr,String fileName)  {
+    public String uploads(String imgStr)  {
         Base64.Decoder decoder = Base64.getDecoder();
         byte[] result = decoder.decode(imgStr);
         if (imgStr == null)
             return "error";
         //生成jpeg图片D:\ruoyi
-        // String imagePath = req.getSession().getServletContext().getRealPath("/");
-        //String imagePath = "D:/ruoyi";
-
+        // 上传文件路径
+        String filePath = RuoYiConfig.getUploadPath()+"/"+DateUtils.datePath() + "/";
+        //String fileName=filePath.concat (DateUtils.datePath() + "/" + IdUtils.fastUUID());
+        //String fileName="";
+        String fileName=filePath.concat ( IdUtils.fastUUID() ).concat ( ".jpg" );
         //新生成的图片
-        String imgFilePath = imagePath+"/"+fileName+".jpg";
-        System.out.print(imgFilePath);
         OutputStream out=null;
-        try {
-            out = new FileOutputStream (imgFilePath);
+        try {File dir = new File(filePath);
+            if (!dir.exists()) {
+                logger.info(filePath + ",目录不存在，则建立目录");
+                try {
+                    dir.mkdirs();
+                } catch (Exception e) {
+                    logger.info("创建文件目录失败"+e,e);
+                }
+            }
+            //String imgFilePath =filePath+"/"+fileName+".jpg";
+            //String fileName=filePath.concat (DateUtils.datePath() + "/" + IdUtils.fastUUID());
+            out = new FileOutputStream (fileName);
             out.write(result);
         }catch (Exception e){
             logger.error ( "图片文件存入失败，{}",e.getMessage (),e );
@@ -142,7 +149,10 @@ public class NewsManageServiceImpl implements GoodsManageService {
                 }
             }
         }
-        return out.toString();
+        String finalName= Constants.RESOURCE_PREFIX.concat (fileName.replace ( RuoYiConfig.getProfile (),"" ));
+        logger.info ( "图片文件存入地址，{}",finalName);
+        return finalName;
+
     }
     /**
      * 获取文本中的img标签的src属性值

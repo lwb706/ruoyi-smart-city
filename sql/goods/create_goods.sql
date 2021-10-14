@@ -80,7 +80,7 @@ CREATE TABLE tongyu_news (
   type   char(1)         not null COMMENT '类型  1：主页置顶新闻  2：信息列表新闻',
   carousel_Name   varchar(1000)   COMMENT '轮播图名称',
   thumbnail_Name  varchar(1000)   COMMENT '缩略图名称',
-  details        varchar(2000)   COMMENT '新闻详情富文本文件名称',
+  details        varchar(5000)   COMMENT '新闻详情富文本文件名称',
   create_time       datetime     comment '创建时间',
   ready_Number       	 bigint(20)		 comment '阅读量',
   collection_Number   bigint(20) 		 comment '收藏人数',

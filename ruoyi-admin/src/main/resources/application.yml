@@ -39,7 +39,6 @@ user:
   password:
     # 密码错误{maxRetryCount}次锁定10分钟
     maxRetryCount: 5
-
 # Spring配置
 spring:
   # 模板引擎
@@ -69,7 +68,8 @@ spring:
     restart:
       # 热部署开关
       enabled: true
-
+    #  resources:
+  #    static-locations: file:${goodsPath.imgageTxtFPath}
 # MyBatis
 mybatis:
     # 搜索指定包别名
@@ -147,6 +147,3 @@ smsHttps:
     # url地址
   okhttpUrl: https://www.baidu.com
     #  okhttpUrl: https://www.ushance.com/web/index/app/send.json
-goodsPath:
-  # 文件存放地址
-  imgageTxtFPath: D:/ruoyi
