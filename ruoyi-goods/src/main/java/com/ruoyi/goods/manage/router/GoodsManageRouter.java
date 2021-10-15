@@ -18,7 +18,13 @@ import java.util.Map;
 public class GoodsManageRouter {
 
     private enum StepType {
-        GOODS0023(GoodsManageConstants.GOODS0023, "goodsAppServiceImpl");
+        GOODS0022(GoodsManageConstants.GOODS0022,"goodsManageServiceImpl"),
+        GOODS0023(GoodsManageConstants.GOODS0023,"goodsManageServiceImpl"),
+        GOODS0024(GoodsManageConstants.GOODS0024,"goodsManageServiceImpl"),
+        GOODS0025(GoodsManageConstants.GOODS0025, "goodsManageServiceImpl"),
+        GOODS0026(GoodsManageConstants.GOODS0026, "goodsManageServiceImpl"),
+        GOODS0027(GoodsManageConstants.GOODS0027, "goodsOrderManageServiceImpl"),
+        GOODS0028(GoodsManageConstants.GOODS0028, "goodsOrderManageServiceImpl");
 
         //接口编码
         private String tranceCode;
