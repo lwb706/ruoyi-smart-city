@@ -79,4 +79,25 @@ public class SysNoticeServiceImpl implements ISysNoticeService
     {
         return noticeMapper.deleteNoticeByIds(Convert.toStrArray(ids));
     }
+    /**
+     * 新增公告阅读信息
+     *
+     * @param notice 公告信息
+     * @return 结果
+     */
+    @Override
+    public int insertNoticeReady ( SysNotice notice ) {
+        return noticeMapper.insertNoticeReady(notice);
+
+    }
+    /**
+     * 查询客户未阅读公告列表
+     *
+     * @param sysNotice 阅读人员姓名
+     * @return 公告集合
+     */
+    @Override
+    public List<SysNotice> selectNoticeNoRead (SysNotice sysNotice ) {
+        return noticeMapper.selectNoticeNoRead(sysNotice);
+    }
 }

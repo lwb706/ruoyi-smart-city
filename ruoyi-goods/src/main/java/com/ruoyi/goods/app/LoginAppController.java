@@ -53,10 +53,9 @@ public class LoginAppController extends BaseController{
     @Value("${smsHttps.okhttpUrl}")
     private String httpUrl;
     @RequestMapping("/goods/login")
-    public AjaxResult login(String phone)
+    public AjaxResult login(HttpServletRequest request,String phone)
     {
         ResultMessage resultMessage=new ResultMessage();
-
         if(StringUtils.isBlank ( phone )){
             resultMessage.setReturnCode ( Contants.PARAM_IS_NULL);
             resultMessage.setReturnMessage ( "请求参数为空" );
@@ -68,6 +67,7 @@ public class LoginAppController extends BaseController{
         {
             subject.login(token);
             SysUser u= userService.selectUserByLoginName(token.getUsername ());
+            request.getSession ().setAttribute ( "SysUser",u );
             return success(u);
         }
         catch (AuthenticationException e)
@@ -83,21 +83,18 @@ public class LoginAppController extends BaseController{
             return error(msg);
         }
     }
-    //发送短信验证码
-    @RequestMapping("/goods/smsCode2222")
-    public AjaxResult smsPhoneCode222( String phone)
+    /*//发送短信验证码
+    @RequestMapping("/goods/smsCode232")
+    public AjaxResult smsCode22(HttpServletRequest request,String phone)
     {
-        logger.info ("获取到的手机号码为,{}",phone  );
+        //List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("file");
+       // List<MultipartFile> files2= ((MultipartHttpServletRequest) request).getFiles("file2");
+
+        //logger.info ("获取到的手机号码为,{}",file  );
         System.out.println("获取到的手机号码为：" + phone);
-        SysUser u= userService.selectUserByLoginName(phone);
         String msg="00000";
-        if (u==null){
-            logger.info ("未查询到该账户数据需要进行注册,{}",phone  );
-            //msg="10000";
-            success("10000");
-        }
         return success(msg);
-    }
+    }*/
     //发送短信验证码
     @RequestMapping("/goods/smsCode")
     public AjaxResult smsPhoneCode(HttpServletResponse response, HttpServletRequest request, String phone)

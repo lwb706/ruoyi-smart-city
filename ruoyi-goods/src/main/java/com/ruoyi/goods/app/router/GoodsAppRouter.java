@@ -19,8 +19,7 @@ public class GoodsAppRouter {
 
     private enum StepType {
         GOODS0001(GoodsAppConstants.GOODS0001, "goodsAppServiceImpl"),
-        GOODS0002(GoodsAppConstants.GOODS0002, "test2ServiceImpl");
-
+        GOODS0005(GoodsAppConstants.GOODS0005, "noticesAppServiceImpl");
         //接口编码
         private String tranceCode;
 
@@ -42,5 +41,4 @@ public class GoodsAppRouter {
     public GoodsAppService getGoodsAppService(String type){
         return appMap.get(StepType.valueOf(type).getServiceName());
     }
-
 }

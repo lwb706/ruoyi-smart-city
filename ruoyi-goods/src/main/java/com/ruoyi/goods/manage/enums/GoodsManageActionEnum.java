@@ -2,6 +2,8 @@ package com.ruoyi.goods.manage.enums;
 
 import com.ruoyi.goods.base.enums.OperTypeEnum;
 import com.ruoyi.goods.domain.Goods;
+import com.ruoyi.goods.domain.News;
+import com.ruoyi.goods.domain.GoodsOrder;
 import com.ruoyi.goods.domain.GoodsOrder;
 import com.ruoyi.goods.manage.constants.GoodsManageConstants;
 
@@ -13,6 +15,11 @@ import com.ruoyi.goods.manage.constants.GoodsManageConstants;
  * @Version 1.0
  */
 public enum GoodsManageActionEnum {
+    GOODS0017(GoodsManageConstants.GOODS0017, News.class, OperTypeEnum.ADD.getCode()),
+    GOODS0018(GoodsManageConstants.GOODS0018, News.class, OperTypeEnum.QUERY.getCode()),
+    GOODS0019(GoodsManageConstants.GOODS0019, News.class, OperTypeEnum.QUERY.getCode()),
+    GOODS0020(GoodsManageConstants.GOODS0020, News.class, OperTypeEnum.UPDATE.getCode()),
+    GOODS0021(GoodsManageConstants.GOODS0021, News.class, OperTypeEnum.DELETE.getCode()),
     GOODS0022(GoodsManageConstants.GOODS0022, Goods.class, OperTypeEnum.DELETE.getCode()),
     GOODS0023(GoodsManageConstants.GOODS0023, Goods.class, OperTypeEnum.ADD.getCode()),
     GOODS0024(GoodsManageConstants.GOODS0024, Goods.class, OperTypeEnum.QUERY.getCode()),
@@ -20,7 +27,6 @@ public enum GoodsManageActionEnum {
     GOODS0026(GoodsManageConstants.GOODS0026, Goods.class, OperTypeEnum.QUERY.getCode()),
     GOODS0027(GoodsManageConstants.GOODS0027, GoodsOrder.class, OperTypeEnum.QUERY.getCode()),
     GOODS0028(GoodsManageConstants.GOODS0028, GoodsOrder.class, OperTypeEnum.UPDATE.getCode());
-
 
     GoodsManageActionEnum(String code, Class domainClass, String operType) {
         this.code = code;

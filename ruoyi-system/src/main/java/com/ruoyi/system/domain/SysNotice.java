@@ -28,6 +28,8 @@ public class SysNotice extends BaseEntity
 
     /** 公告状态（0正常 1关闭） */
     private String status;
+    /** 阅读用户 */
+    private String noticeReadName;
 
     public Long getNoticeId()
     {
@@ -43,6 +45,7 @@ public class SysNotice extends BaseEntity
     {
         this.noticeTitle = noticeTitle;
     }
+
 
     @NotBlank(message = "公告标题不能为空")
     @Size(min = 0, max = 50, message = "公告标题不能超过50个字符")
@@ -79,6 +82,14 @@ public class SysNotice extends BaseEntity
     public String getStatus()
     {
         return status;
+    }
+
+    public String getNoticeReadName () {
+        return noticeReadName;
+    }
+
+    public void setNoticeReadName ( String noticeReadName ) {
+        this.noticeReadName = noticeReadName;
     }
 
     @Override

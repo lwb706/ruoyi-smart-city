@@ -18,6 +18,11 @@ import java.util.Map;
 public class GoodsManageRouter {
 
     private enum StepType {
+        GOODS0017(GoodsManageConstants.GOODS0017, "newsManageServiceImpl"),
+        GOODS0018(GoodsManageConstants.GOODS0018, "newsManageServiceImpl"),
+        GOODS0019(GoodsManageConstants.GOODS0019, "newsManageServiceImpl"),
+        GOODS0020(GoodsManageConstants.GOODS0020, "newsManageServiceImpl"),
+        GOODS0021(GoodsManageConstants.GOODS0021, "newsManageServiceImpl"),
         GOODS0022(GoodsManageConstants.GOODS0022,"goodsManageServiceImpl"),
         GOODS0023(GoodsManageConstants.GOODS0023,"goodsManageServiceImpl"),
         GOODS0024(GoodsManageConstants.GOODS0024,"goodsManageServiceImpl"),

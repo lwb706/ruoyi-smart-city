@@ -49,4 +49,20 @@ public interface ISysNoticeService
      * @return 结果
      */
     public int deleteNoticeByIds(String ids);
+    /**
+     * 新增公告阅读信息
+     *
+     * @param notice 公告信息
+     * @return 结果
+     */
+    public int insertNoticeReady(SysNotice notice);
+    /**
+     * 查询客户未阅读公告列表
+     *
+     * @param sysNotice 阅读人员姓名
+     * @return 公告集合
+     */
+    public List<SysNotice> selectNoticeNoRead(SysNotice sysNotice);
+
+
 }

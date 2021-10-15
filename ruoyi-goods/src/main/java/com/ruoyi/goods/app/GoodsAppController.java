@@ -1,10 +1,14 @@
 package com.ruoyi.goods.app;
 
+import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.core.controller.BaseController;
+import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.json.JSON;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.goods.app.enums.GoodsAppActionEnum;
 import com.ruoyi.goods.app.router.GoodsAppRouter;
+import com.ruoyi.goods.base.util.Contants;
+import com.ruoyi.goods.domain.ResultMessage;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +45,13 @@ public class GoodsAppController extends BaseController{
     @RequestMapping("/goods/app")
     public Object getParamMessage(HttpServletRequest request, HttpServletResponse response){
         String tranceCode = request.getParameter(TRAN_CODE);
+        SysUser user = (SysUser)request.getSession().getAttribute("SysUser");
+        if (user==null){
+            ResultMessage res=new ResultMessage();
+            res.setReturnCode ( Contants.LOGIN_NONE);
+            res.setReturnMessage ( "用户未登录" );
+            return success(res);
+        }
         try {
             if(StringUtils.isNotEmpty(tranceCode)){
                 GoodsAppActionEnum goodsAppActionEnum = GoodsAppActionEnum.valueOf(tranceCode);
