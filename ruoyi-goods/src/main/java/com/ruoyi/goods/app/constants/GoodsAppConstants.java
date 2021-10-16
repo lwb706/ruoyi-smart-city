@@ -39,7 +39,7 @@ public class GoodsAppConstants {
     /**商品列表查询*/
     public static final String GOODS0010 = "GOODS0010";
 
-    /**商品列表详细查询*/
+    /**订单退货接口*/
     public static final String GOODS0011 = "GOODS0011";
 
     /**商品下单页面*/
