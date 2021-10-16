@@ -62,7 +62,7 @@ public class GoodsAppController extends BaseController{
             }
         } catch (Exception e) {
             logger.warn("商品app,[{}]接口请求失败", tranceCode, e);
-            return error(e);
+            return error(e.getMessage());
         }
         return error();
     }
