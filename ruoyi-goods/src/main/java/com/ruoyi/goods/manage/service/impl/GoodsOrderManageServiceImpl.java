@@ -1,6 +1,5 @@
 package com.ruoyi.goods.manage.service.impl;
 
-import com.ruoyi.common.utils.uuid.IdUtils;
 import com.ruoyi.goods.app.mapper.GoodsPlaceOrderMapper;
 import com.ruoyi.goods.base.enums.OperTypeEnum;
 import com.ruoyi.goods.base.enums.OrderStatusEnum;
@@ -51,17 +50,38 @@ public class GoodsOrderManageServiceImpl implements GoodsManageService {
      */
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     private void updateGoods(Object obj){
-        //1、修改订单信息
         GoodsOrder goodsOrder = (GoodsOrder) obj;
-        goodsOrder.setOrderStatus(OrderStatusEnum.RETURNED.getCode());
+        //退货状态下进行退款操作（管理端操作状态：拒绝退货，同意退货）
+        if(OrderStatusEnum.RETURNED.getCode().equals(goodsOrder.getOrderStatus())){
+            //2、调取微信接口进行退款操作
+            //TODO
+
+            //3、退款成功后把量进行还原操作
+            addGoodsNum(goodsOrder);
+        }
+        //退款成功后，修改订单信息
         goodsPlaceOrderMapper.updateGoodsOrder(goodsOrder);
-        //2、调取微信接口进行退款操作
-        //TODO
-
-        //3、退款成功后把量进行还原操作（待确定）
-
     }
 
+    /**
+     * 修改商量卖出数量
+     * @param goodsOrder
+     * @throws Exception
+     */
+    private void addGoodsNum(GoodsOrder goodsOrder){
+        Goods goods = new Goods();
+        goods.setId(goodsOrder.getCommodityId());
+        List<Goods> goodsList = goodsMessageMapper.queryGoodsList(goods);
+        if(goodsList.size() > 0){
+            int sell = goodsList.get(0).getSell() - goodsOrder.getSum();
+            if(sell < 0){
+                sell = 0;
+            }
+            goods.setSell(sell);
+            goodsMessageMapper.updateGoods(goods);
+        }
+
+    }
     /**
      * 查询商品信息列表
      * @param obj

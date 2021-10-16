@@ -94,6 +94,9 @@
             <if test="commodityName != null and commodityName != ''">
                and NAME = #{commodityName,jdbcType=VARCHAR}
             </if>
+            <if test="commodityType != null and commodityType != ''">
+                and COMMODITYTYPE = #{commodityType,jdbcType=VARCHAR}
+            </if>
         </where>
     </select>
 
