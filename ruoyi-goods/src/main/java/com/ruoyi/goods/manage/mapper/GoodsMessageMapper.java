@@ -12,4 +12,5 @@ public interface GoodsMessageMapper {
     void updateGoods(Goods goods);
     void deleteGoods(@Param("id") String id);
     List<Goods> queryGoodsList(Goods goods);
+    int queryGoodsCount(Goods goods);
 }

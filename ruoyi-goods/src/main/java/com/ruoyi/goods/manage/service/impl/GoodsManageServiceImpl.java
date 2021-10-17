@@ -1,7 +1,9 @@
 package com.ruoyi.goods.manage.service.impl;
 
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.uuid.IdUtils;
 import com.ruoyi.goods.base.enums.OperTypeEnum;
+import com.ruoyi.goods.base.util.ImgUtil;
 import com.ruoyi.goods.domain.Goods;
 import com.ruoyi.goods.manage.mapper.GoodsMessageMapper;
 import com.ruoyi.goods.manage.service.GoodsManageService;
@@ -10,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * CLASS_NAME
@@ -51,6 +55,10 @@ public class GoodsManageServiceImpl implements GoodsManageService {
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     private void addGoods(Object obj){
         Goods goods = (Goods) obj;
+        if(StringUtils.isNotEmpty(goods.getRichTextId())){
+            //富文本转换
+            goods.setRichTextId(ImgUtil.handleImg(goods.getRichTextId()));
+        }
         //生成唯一ID
         goods.setId(IdUtils.fastSimpleUUID());
         goodsMessageMapper.insertGoods(goods);
@@ -63,6 +71,10 @@ public class GoodsManageServiceImpl implements GoodsManageService {
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     private void updateGoods(Object obj){
         Goods goods = (Goods) obj;
+        if(StringUtils.isNotEmpty(goods.getRichTextId())){
+            //富文本转换
+            goods.setRichTextId(ImgUtil.handleImg(goods.getRichTextId()));
+        }
         goodsMessageMapper.updateGoods(goods);
     }
 
@@ -81,8 +93,13 @@ public class GoodsManageServiceImpl implements GoodsManageService {
      * @param obj
      * @return
      */
-    private List<Goods> queryGoodsList(Object obj){
+    private Map<String, Object> queryGoodsList(Object obj){
+        Map<String, Object> map = new HashMap<>();
         Goods goods = (Goods) obj;
-        return goodsMessageMapper.queryGoodsList(goods);
+        map.put("pageStart", goods.getPageStart());
+        map.put("pageLimit", goods.getPageLimit());
+        map.put("total", goodsMessageMapper.queryGoodsCount(goods));
+        map.put("list", goodsMessageMapper.queryGoodsList(goods));
+        return map;
     }
 }

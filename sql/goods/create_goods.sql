@@ -1,15 +1,24 @@
 drop table if exists tongyu_shop;
 CREATE TABLE `tongyu_shop` (
-  `id` varchar(50) NOT NULL,
-  `name` varchar(100) DEFAULT NULL,
-  `price` bigint DEFAULT NULL COMMENT '原价：分',
-  `discount` bigint DEFAULT NULL COMMENT '折扣价：分',
-  `sum` int DEFAULT NULL COMMENT '剩余总数',
-  `sell` int DEFAULT NULL COMMENT '卖出数量',
-  `carousel` json DEFAULT NULL COMMENT '轮播',
-  `detail` json DEFAULT NULL COMMENT '图文详情',
-  `richText_id` varchar(50) DEFAULT NULL COMMENT '富文本id；旅游才有',
-  `json` json DEFAULT NULL,
+  `ID` varchar(50) NOT NULL,
+  `TITLE` varchar(100) DEFAULT NULL COMMENT '标题',
+  `TYPE` int DEFAULT NULL COMMENT '类型  1：主页置顶商品  2：信息商品列表',
+  `CAROUSEL` text DEFAULT NULL COMMENT '轮播图',
+  `NUM` int DEFAULT NULL COMMENT '排列序号',
+  `SHOWPICTURE` text DEFAULT NULL COMMENT '缩略图展示',
+  `RICHTEXT_ID` varchar(50) DEFAULT NULL COMMENT '富文本id；旅游才有',
+  `COMMODITY_TYPE` varchar(10) DEFAULT NULL COMMENT '商品类型 1：酒店，2：餐饮，3：酒水，4：建材
+，5：设备',
+  `COMMODITY_NAME` varchar(100) DEFAULT NULL COMMENT '商品名称',
+  `SUM` int DEFAULT NULL COMMENT '总数',
+  `SELL` int DEFAULT NULL COMMENT '卖出数量',
+  `PRICE` bigint DEFAULT NULL COMMENT '原价：分',
+  `DISCOUNT` bigint DEFAULT NULL COMMENT '折扣价：分',
+  `COMMODITYDESC` text DEFAULT NULL COMMENT '商品描述',
+  `DETAIL` text DEFAULT NULL COMMENT '图文详情',
+  `JSON` text DEFAULT NULL,
+  `TRADE_START_DATE` varchar(50) DEFAULT NULL COMMENT '购买开始时间',
+  `TRADE_END_DATE` varchar(50) DEFAULT NULL COMMENT '购买结束时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 comment = '商品表';
 
@@ -24,20 +33,21 @@ CREATE TABLE `tongyu_shopmessage` (
 
 drop table if exists tongyu_shoporder;
 CREATE TABLE `tongyu_shoporder` (
-  `id` varchar(50) NOT NULL,
-  `prices` bigint DEFAULT NULL COMMENT '总计价格：分',
-  `pay` bigint DEFAULT NULL COMMENT '支付价格：分',
-  `sum` int DEFAULT NULL COMMENT '购买总数',
-  `shop_id` varchar(50) DEFAULT NULL COMMENT '商品id',
-  `order_status` varchar(50) DEFAULT NULL COMMENT '订单状态',
-  `type` varchar(50)  DEFAULT NULL COMMENT '类型；普通商品，门票',
-  `user_id` varchar(50) DEFAULT NULL COMMENT '下单人id',
-  `json` json DEFAULT NULL,
-  `payTime` datetime DEFAULT NULL COMMENT '支付时间',
-  `address` varchar(255) DEFAULT NULL COMMENT '地址',
-  `phone` varchar(50) DEFAULT NULL COMMENT '用户手机',
-  `create_date_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `pay_Time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `ID` varchar(50) NOT NULL,
+  `COMMODITY_ID` varchar(100) DEFAULT NULL COMMENT '商品ID',
+  `COMMODITY_NAME` varchar(100) DEFAULT NULL COMMENT '商品名称',
+  `TYPE` varchar(10)  DEFAULT NULL COMMENT '类型；0：普通商品: 1：门票',
+  `SPECIFICATIONS` text DEFAULT NULL COMMENT '商品规格(json格式)',
+  `PRICES` bigint DEFAULT NULL COMMENT '总计价格：分',
+  `ORDER_STATUS` varchar(50) DEFAULT NULL COMMENT '订单状态U:未支付P:已支付C：退货中R：已退货',
+  `PAY` bigint DEFAULT NULL COMMENT '支付价格：分',
+  `SUM` int DEFAULT NULL COMMENT '购买总数',
+  `USER_ID` varchar(50) DEFAULT NULL COMMENT '下单人id',
+  `ADDRESS` varchar(255) DEFAULT NULL COMMENT '地址',
+  `PHONE` varchar(50) DEFAULT NULL COMMENT '用户手机',
+  `CREATE_DATE_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `PAY_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '支付时间',
+  `JSON` json DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 comment = '商品订单表';
 

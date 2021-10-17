@@ -55,7 +55,7 @@ public class Goods extends BaseDomain{
     private String commodityName;
 
     /**
-     * 剩余总数
+     * 总数
      */
     private int sum;
 
@@ -103,6 +103,21 @@ public class Goods extends BaseDomain{
      * 购买结束时间
      */
     private String tradeEndDate;
+
+    /**
+     * 页码
+     */
+    private int pageStart;
+
+    /**
+     * 每页条数
+     */
+    private int pageLimit;
+
+    /**
+     * 总条数
+     */
+    private int total;
 
     public String getId() {
         return id;
@@ -256,6 +271,30 @@ public class Goods extends BaseDomain{
         this.tradeEndDate = tradeEndDate;
     }
 
+    public int getPageStart() {
+        return pageStart;
+    }
+
+    public void setPageStart(int pageStart) {
+        this.pageStart = pageStart;
+    }
+
+    public int getPageLimit() {
+        return pageLimit;
+    }
+
+    public void setPageLimit(int pageLimit) {
+        this.pageLimit = pageLimit;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
     @Override
     public String toString() {
         return "Goods{" +
@@ -265,19 +304,22 @@ public class Goods extends BaseDomain{
                 ", carousel='" + carousel + '\'' +
                 ", num=" + num +
                 ", showPicture='" + showPicture + '\'' +
-                ", richText='" + richTextId + '\'' +
+                ", richTextId='" + richTextId + '\'' +
                 ", commodityType='" + commodityType + '\'' +
                 ", commodityName='" + commodityName + '\'' +
                 ", sum=" + sum +
                 ", sell=" + sell +
                 ", price=" + price +
-                ", disPrice=" + discount +
+                ", discount=" + discount +
                 ", limit=" + limit +
                 ", commodityDesc='" + commodityDesc + '\'' +
                 ", detail='" + detail + '\'' +
                 ", json='" + json + '\'' +
                 ", tradeStartDate='" + tradeStartDate + '\'' +
                 ", tradeEndDate='" + tradeEndDate + '\'' +
+                ", pageStart=" + pageStart +
+                ", pageLimit=" + pageLimit +
+                ", total=" + total +
                 '}';
     }
 }

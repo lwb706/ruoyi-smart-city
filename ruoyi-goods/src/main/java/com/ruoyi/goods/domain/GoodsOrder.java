@@ -84,6 +84,21 @@ public class GoodsOrder {
 
     private String json;
 
+    /**
+     * 页码
+     */
+    private int pageStart;
+
+    /**
+     * 每页条数
+     */
+    private int pageLimit;
+
+    /**
+     * 总条数
+     */
+    private int total;
+
     public String getId() {
         return id;
     }
@@ -204,6 +219,30 @@ public class GoodsOrder {
         this.orderStatus = orderStatus;
     }
 
+    public int getPageStart() {
+        return pageStart;
+    }
+
+    public void setPageStart(int pageStart) {
+        this.pageStart = pageStart;
+    }
+
+    public int getPageLimit() {
+        return pageLimit;
+    }
+
+    public void setPageLimit(int pageLimit) {
+        this.pageLimit = pageLimit;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
     @Override
     public String toString() {
         return "GoodsOrder{" +
@@ -222,6 +261,9 @@ public class GoodsOrder {
                 ", createTime=" + createTime +
                 ", payTime=" + payTime +
                 ", json='" + json + '\'' +
+                ", pageStart=" + pageStart +
+                ", pageLimit=" + pageLimit +
+                ", total=" + total +
                 '}';
     }
 }

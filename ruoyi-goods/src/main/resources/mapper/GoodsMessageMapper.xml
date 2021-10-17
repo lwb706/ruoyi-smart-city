@@ -4,57 +4,96 @@
 
     <resultMap id="goodsMap" type="com.ruoyi.goods.domain.Goods">
         <result column="ID" jdbcType="VARCHAR" property="id" />
-        <result column="NAME" jdbcType="VARCHAR" property="commodityName" />
-        <result column="PRICE" jdbcType="BIGINT" property="price" />
-        <result column="DISCOUNT" jdbcType="BIGINT" property="discount" />
+        <result column="TITLE" jdbcType="VARCHAR" property="title" />
+        <result column="TYPE" jdbcType="INTEGER" property="type" />
+        <result column="CAROUSEL" jdbcType="VARCHAR" property="carousel" />
+        <result column="NUM" jdbcType="INTEGER" property="num" />
+        <result column="SHOWPICTURE" jdbcType="VARCHAR" property="showPicture" />
+        <result column="RICHTEXT_ID" jdbcType="VARCHAR" property="richTextId" />
+        <result column="COMMODITY_TYPE" jdbcType="VARCHAR" property="commodityType" />
+        <result column="COMMODITY_NAME" jdbcType="VARCHAR" property="commodityName" />
         <result column="SUM" jdbcType="INTEGER" property="sum" />
         <result column="SELL" jdbcType="INTEGER" property="sell" />
-        <result column="CAROUSEL" jdbcType="VARCHAR" property="carousel" />
+        <result column="PRICE" jdbcType="BIGINT" property="price" />
+        <result column="DISCOUNT" jdbcType="BIGINT" property="discount" />
+        <result column="COMMODITYDESC" jdbcType="VARCHAR" property="commodityDesc" />
         <result column="DETAIL" jdbcType="VARCHAR" property="detail" />
-        <result column="RICHTEXT_ID" jdbcType="VARCHAR" property="richTextId" />
         <result column="JSON" jdbcType="VARCHAR" property="json" />
+        <result column="TRADE_START_DATE" jdbcType="VARCHAR" property="tradeStartDate" />
+        <result column="TRADE_END_DATE" jdbcType="VARCHAR" property="tradeEndDate" />
     </resultMap>
 
     <sql id="column_list">
         ID,
-        NAME,
-        PRICE,
-        DISCOUNT,
+        TITLE,
+        TYPE,
+        CAROUSEL,
+        NUM,
+        SHOWPICTURE,
+        RICHTEXT_ID,
+        COMMODITY_TYPE,
+        COMMODITY_NAME,
         SUM,
         SELL,
-        CAROUSEL,
+        PRICE,
+        DISCOUNT,
+        COMMODITYDESC,
         DETAIL,
-        RICHTEXT_ID,
-        JSON
+        JSON,
+        TRADE_START_DATE,
+        TRADE_END_DATE
     </sql>
 
     <insert id="insertGoods" parameterType="com.ruoyi.goods.domain.Goods">
         INSERT INTO tongyu_shop (<include refid="column_list"/>)
         VALUES(
         #{id,jdbcType=VARCHAR},
+        #{title,jdbcType=VARCHAR},
+        #{type,jdbcType=INTEGER},
+        #{carousel,jdbcType=VARCHAR},
+        #{num,jdbcType=INTEGER},
+        #{showPicture,jdbcType=VARCHAR},
+        #{richTextId,jdbcType=VARCHAR},
+        #{commodityType,jdbcType=VARCHAR},
         #{commodityName,jdbcType=VARCHAR},
-        #{price,jdbcType=BIGINT},
-        #{discount,jdbcType=BIGINT},
         #{sum,jdbcType=INTEGER},
         #{sell,jdbcType=INTEGER},
-        #{carousel,jdbcType=VARCHAR},
+        #{price,jdbcType=BIGINT},
+        #{discount,jdbcType=BIGINT},
+        #{commodityDesc,jdbcType=VARCHAR},
         #{detail,jdbcType=VARCHAR},
-        #{richTextId,jdbcType=VARCHAR},
-        #{json,jdbcType=VARCHAR}
+        #{json,jdbcType=VARCHAR},
+        #{tradeStartDate,jdbcType=VARCHAR},
+        #{tradeEndDate,jdbcType=VARCHAR}
         )
     </insert>
     <update id="updateGoods" parameterType="com.ruoyi.goods.domain.Goods">
         update tongyu_shop
         <set>
             <trim suffixOverrides=",">
+                <if test="title != null and title != ''">
+                    TITLE = #{title,jdbcType=VARCHAR},
+                </if>
+                <if test="type != null and type >= 0 ">
+                    TYPE = #{type,jdbcType=INTEGER},
+                </if>
+                <if test="carousel != null and carousel != ''">
+                    CAROUSEL = #{carousel,jdbcType=VARCHAR},
+                </if>
+                <if test="num != null and num >= 0 ">
+                    NUM = #{num,jdbcType=INTEGER},
+                </if>
+                <if test="showPicture != null and showPicture != ''">
+                    SHOWPICTURE = #{showPicture,jdbcType=VARCHAR},
+                </if>
+                <if test="richTextId != null and richTextId != ''">
+                    RICHTEXT_ID = #{richTextId,jdbcType=VARCHAR},
+                </if>
+                <if test="commodityType != null and commodityType != ''">
+                    COMMODITY_TYPE = #{commodityType,jdbcType=VARCHAR},
+                </if>
                 <if test="commodityName != null and commodityName != ''">
-                    NAME = #{commodityName,jdbcType=VARCHAR},
-                </if>
-                <if test="price != null and price >= 0 ">
-                    PRICE = #{price,jdbcType=BIGINT},
-                </if>
-                <if test="discount != null and discount >= 0 ">
-                    DISCOUNT = #{discount,jdbcType=BIGINT},
+                    COMMODITY_NAME = #{commodityName,jdbcType=VARCHAR},
                 </if>
                 <if test="sum != null and sum >= 0 ">
                     SUM = #{sum,jdbcType=BIGINT},
@@ -62,18 +101,28 @@
                 <if test="sell != null and sell >= 0 ">
                     SELL = #{sell,jdbcType=BIGINT},
                 </if>
-                <if test="carousel != null and carousel != ''">
-                    CAROUSEL = #{carousel,jdbcType=VARCHAR},
+                <if test="price != null and price >= 0 ">
+                    PRICE = #{price,jdbcType=BIGINT},
+                </if>
+                <if test="discount != null and discount >= 0 ">
+                    DISCOUNT = #{discount,jdbcType=BIGINT},
+                </if>
+                <if test="commodityDesc != null and commodityDesc != ''">
+                    COMMODITYDESC = #{commodityDesc,jdbcType=VARCHAR},
                 </if>
                 <if test="detail != null and detail != ''">
                     DETAIL = #{detail,jdbcType=VARCHAR},
                 </if>
-                <if test="richTextId != null and richTextId != ''">
-                    RICHTEXT_ID = #{richTextId,jdbcType=VARCHAR},
-                </if>
                 <if test="json != null and json != ''">
-                    JSON = #{json,jdbcType=VARCHAR}
+                    JSON = #{json,jdbcType=VARCHAR},
                 </if>
+                <if test="tradeStartDate != null and tradeStartDate != ''">
+                    TRADE_START_DATE = #{tradeStartDate,jdbcType=VARCHAR},
+                </if>
+                <if test="tradeEndDate != null and tradeEndDate != ''">
+                    TRADE_END_DATE = #{tradeEndDate,jdbcType=VARCHAR}
+                </if>
+
             </trim>
         </set>
         WHERE
@@ -92,12 +141,31 @@
                 and ID = #{id,jdbcType=VARCHAR},
             </if>
             <if test="commodityName != null and commodityName != ''">
-               and NAME = #{commodityName,jdbcType=VARCHAR}
+               and COMMODITY_NAME = #{commodityName,jdbcType=VARCHAR}
             </if>
             <if test="commodityType != null and commodityType != ''">
-                and COMMODITYTYPE = #{commodityType,jdbcType=VARCHAR}
+                and COMMODITY_TYPE = #{commodityType,jdbcType=VARCHAR}
             </if>
         </where>
+        ORDER BY NUM
+        LIMIT #{pageStart},#{pageLimit}
+    </select>
+
+    <select id="queryGoodsCount" parameterType="com.ruoyi.goods.domain.Goods" resultType="java.lang.Integer">
+        SELECT <include refid="column_list"/>
+        FROM tongyu_shop
+        <where>
+            <if test="id != null and id != ''">
+                and ID = #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityName != null and commodityName != ''">
+                and COMMODITY_NAME = #{commodityName,jdbcType=VARCHAR}
+            </if>
+            <if test="commodityType != null and commodityType != ''">
+                and COMMODITY_TYPE = #{commodityType,jdbcType=VARCHAR}
+            </if>
+        </where>
+        ORDER BY NUM
     </select>
 
 </mapper>

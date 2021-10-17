@@ -12,4 +12,5 @@ public interface GoodsPlaceOrderMapper {
     void updateGoodsOrder(GoodsOrder goodsOrder);
     void deleteGoodsOrder(@Param("id") String id);
     List<GoodsOrder> queryGoodsOrderList(GoodsOrder goodsOrder);
+    int queryGoodsOrderCount(GoodsOrder goodsOrder);
 }
