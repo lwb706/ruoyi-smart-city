@@ -2,6 +2,7 @@ package com.ruoyi.goods.app.service.impl;
 
 import com.ruoyi.goods.app.mapper.GoodsPlaceOrderMapper;
 import com.ruoyi.goods.app.service.GoodsAppService;
+import com.ruoyi.goods.base.util.ImgUtil;
 import com.ruoyi.goods.domain.GoodsOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,7 @@ public class GoodsOrderQueryImpl implements GoodsAppService {
         Map<String, Object> map = new HashMap<>();
         map.put("pageStart", goodsOrder.getPageStart());
         map.put("pageLimit", goodsOrder.getPageLimit());
+        goodsOrder.setPageStart(ImgUtil.getStart(goodsOrder.getPageStart(), goodsOrder.getPageLimit()));
         map.put("total", goodsPlaceOrderMapper.queryGoodsOrderCount(goodsOrder));
         map.put("list", goodsPlaceOrderMapper.queryGoodsOrderList(goodsOrder));
         return (T) map;

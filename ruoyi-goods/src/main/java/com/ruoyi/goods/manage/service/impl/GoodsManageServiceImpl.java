@@ -98,6 +98,7 @@ public class GoodsManageServiceImpl implements GoodsManageService {
         Goods goods = (Goods) obj;
         map.put("pageStart", goods.getPageStart());
         map.put("pageLimit", goods.getPageLimit());
+        goods.setPageStart(ImgUtil.getStart(goods.getPageStart(), goods.getPageLimit()));
         map.put("total", goodsMessageMapper.queryGoodsCount(goods));
         map.put("list", goodsMessageMapper.queryGoodsList(goods));
         return map;

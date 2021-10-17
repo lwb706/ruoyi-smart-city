@@ -117,4 +117,15 @@ public class ImgUtil {
         return finalName;
 
     }
+
+
+    public static int getStart(int pageStart, int pageLimit) {
+        int start = 0;
+        if (pageStart - 1 <= 0) {
+            start = 0;
+        } else {
+            start = (pageStart - 1) * pageLimit;
+        }
+        return start;
+    }
 }
