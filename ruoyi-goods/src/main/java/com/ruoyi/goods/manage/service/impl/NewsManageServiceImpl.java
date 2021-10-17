@@ -12,7 +12,6 @@ import com.ruoyi.goods.manage.service.GoodsManageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -57,6 +56,9 @@ public class NewsManageServiceImpl implements GoodsManageService {
     private void updateNews(Object obj){
         //1、修改订单信息
         News news = (News) obj;
+        if (StringUtils.isNotBlank (news.getDetails ())){
+            news.setDetails (handleImg(news.getDetails ()));
+        }
         newsMapper.updateNews(news);
     }
 

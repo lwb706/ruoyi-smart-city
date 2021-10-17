@@ -3,7 +3,7 @@
 <mapper namespace="com.ruoyi.goods.manage.mapper.SysNewsMapper">
 
     <resultMap id="newsMap" type="com.ruoyi.goods.domain.News">
-        <result column="NEW_ID" jdbcType="BIGINT" property="newId" />
+        <result column="NEW_ID" jdbcType="BIGINT" property="newsId" />
         <result column="TITLE" jdbcType="VARCHAR" property="title" />
         <result column="TYPE" jdbcType="VARCHAR" property="type" />
         <result column="carousel_Name" jdbcType="VARCHAR" property="carouselName" />
@@ -51,7 +51,7 @@
         sysdate()
         )
     </insert>
-    <select id="selectNewsList" parameterType="SysNotice" resultMap="newsMap">
+    <select id="selectNewsList" parameterType="com.ruoyi.goods.domain.News" resultMap="newsMap">
         select news_Id,title,carousel_Name,thumbnail_Name,details,create_time,ready_Number,collection_Number,create_by
         FROM tongyu_news
         <where>
@@ -64,7 +64,7 @@
         </where>
     </select>
 
-    <update id="updateNews" parameterType="SysNotice">
+    <update id="updateNews" parameterType="com.ruoyi.goods.domain.News">
         update tongyu_news
         <set>
             <if test="title != null and title != ''">title = #{title}, </if>
@@ -80,4 +80,17 @@
     <delete id="deleteNewsById" parameterType="java.lang.String">
         delete from tongyu_news where news_Id =#{newsId}
     </delete>
+    <insert id="insertComment" parameterType="com.ruoyi.goods.domain.CommentNews">
+        insert into tongyu_news_comment (
+        <if test="nickName != null and nickName != '' ">news_Id, </if>
+        <if test="content != null and content != '' ">content, </if>
+        <if test="newsId != null and newsId != ''">news_Id,</if>
+        create_time
+        )values(
+        <if test="newsId != null and newsId != ''">#{newsId}, </if>
+        <if test="content != null and content != ''">#{content}, </if>
+        <if test="newsId != null and newsId != ''">#{newsId}, </if>
+        sysdate()
+        )
+    </insert>
 </mapper>

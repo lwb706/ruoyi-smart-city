@@ -1,4 +1,5 @@
 package com.ruoyi.goods.manage.mapper;
+import com.ruoyi.goods.domain.CommentNews;
 import com.ruoyi.goods.domain.News;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -9,4 +10,6 @@ public interface SysNewsMapper {
     void updateNews ( News news );
     void deleteNewsById ( String newsId );
     List<News> selectNewsList ( News news );
+    int  insertComment ( CommentNews commentNews );
+
 }

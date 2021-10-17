@@ -1,6 +1,7 @@
 package com.ruoyi.goods.app.enums;
 
 import com.ruoyi.goods.app.constants.GoodsAppConstants;
+import com.ruoyi.goods.domain.CommentNews;
 import com.ruoyi.goods.domain.Goods;
 import com.ruoyi.goods.domain.GoodsOrder;
 import com.ruoyi.goods.domain.NoticeParam;
@@ -17,6 +18,7 @@ public enum GoodsAppActionEnum {
     GOODS0001(GoodsAppConstants.GOODS0001, Object.class),
     GOODS0002(GoodsAppConstants.GOODS0002, Object.class),
     GOODS0005(GoodsAppConstants.GOODS0005, NoticeParam.class),
+    GOODS0006(GoodsAppConstants.GOODS0006, CommentNews.class),
 
     GOODS0011(GoodsAppConstants.GOODS0011, GoodsOrder.class),
     GOODS0012(GoodsAppConstants.GOODS0012, GoodsOrder.class),

@@ -88,3 +88,14 @@ CREATE TABLE tongyu_news (
 	update_time       datetime     comment '更新时间',
   PRIMARY KEY (`news_Id`)
 ) ENGINE=InnoDB auto_increment=100 comment = '新闻资讯表';
+
+drop table if exists tongyu_news_comment;
+create table `tongyu_news_comment` (
+`id` int(11) not null auto_increment comment '主键id',
+`user_Id` varchar(255) default null comment '评论者昵称',
+`content` varchar(255) default null comment '评论的内容',
+`news_id` int(11) default null comment '评论的新闻id',
+  create_time       datetime     comment '创建时间',
+primary key (`id`)
+
+) ENGINE=InnoDB auto_increment=100 comment '评论表';
