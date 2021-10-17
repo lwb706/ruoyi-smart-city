@@ -138,10 +138,10 @@
         FROM tongyu_shop
         <where>
             <if test="id != null and id != ''">
-                and ID = #{id,jdbcType=VARCHAR},
+                and ID = #{id,jdbcType=VARCHAR}
             </if>
-            <if test="commodityName != null and commodityName != ''">
-               and COMMODITY_NAME = #{commodityName,jdbcType=VARCHAR}
+            <if test="type != null">
+                and TYPE = #{type,jdbcType=INTEGER}
             </if>
             <if test="commodityType != null and commodityType != ''">
                 and COMMODITY_TYPE = #{commodityType,jdbcType=VARCHAR}
@@ -152,14 +152,14 @@
     </select>
 
     <select id="queryGoodsCount" parameterType="com.ruoyi.goods.domain.Goods" resultType="java.lang.Integer">
-        SELECT <include refid="column_list"/>
+        SELECT COUNT(*)
         FROM tongyu_shop
         <where>
             <if test="id != null and id != ''">
-                and ID = #{id,jdbcType=VARCHAR},
+                and ID = #{id,jdbcType=VARCHAR}
             </if>
-            <if test="commodityName != null and commodityName != ''">
-                and COMMODITY_NAME = #{commodityName,jdbcType=VARCHAR}
+            <if test="type != null">
+                and TYPE = #{type,jdbcType=INTEGER}
             </if>
             <if test="commodityType != null and commodityType != ''">
                 and COMMODITY_TYPE = #{commodityType,jdbcType=VARCHAR}
