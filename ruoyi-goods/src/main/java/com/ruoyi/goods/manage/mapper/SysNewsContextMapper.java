@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-public interface SysNewsMapper {
+public interface SysNewsContextMapper {
     int  insertNews ( News news );
     void updateNews ( News news );
     void deleteNewsById ( String newsId );

@@ -1,6 +1,6 @@
 package com.ruoyi.goods.domain;
 //富文本
-public class RichText {
+public class RichContext {
    public String createId;
    public String content;
    public  String createName;
