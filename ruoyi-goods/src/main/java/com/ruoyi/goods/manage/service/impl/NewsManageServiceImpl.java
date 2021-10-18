@@ -57,9 +57,9 @@ public class NewsManageServiceImpl implements GoodsManageService {
     private void updateNews(Object obj){
         //1、修改订单信息
         News news = (News) obj;
-        if (StringUtils.isNotBlank (news.getDetails ())){
+        /*if (StringUtils.isNotBlank (news.getDetails ())){
             news.setDetails (ImgUtil.handleImg(news.getDetails ()));
-        }
+        }*/
         newsMapper.updateNews(news);
     }
 
@@ -72,9 +72,9 @@ public class NewsManageServiceImpl implements GoodsManageService {
     private void insertNews(Object obj){
         //1、修改订单信息
         News news = (News) obj;
-        if (StringUtils.isNotBlank (news.getDetails ())){
+        /*if (StringUtils.isNotBlank (news.getDetails ())){
             news.setDetails (ImgUtil.handleImg(news.getDetails ()));
-        }
+        }*/
         newsMapper.insertNews(news);
     }
    /**
