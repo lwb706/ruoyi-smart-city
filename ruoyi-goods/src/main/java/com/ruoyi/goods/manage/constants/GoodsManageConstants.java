@@ -54,6 +54,15 @@ public class GoodsManageConstants {
     /**管理台公告新增*/
     public static final String GOODS0031 = "GOODS0031";
 
-    /**管理台公告删除*/
+    /**富文本修改*/
     public static final String GOODS0032 = "GOODS0032";
+
+    /**富文本列表查询*/
+    public static final String GOODS0033 = "GOODS0033";
+
+    /**富文本新增*/
+    public static final String GOODS0034 = "GOODS0034";
+
+    /**富文本删除*/
+    public static final String GOODS0035 = "GOODS0035";
 }

@@ -95,7 +95,8 @@ CREATE TABLE tongyu_news (
   ready_Number       	 bigint(20)		 comment '阅读量',
   collection_Number   bigint(20) 		 comment '收藏人数',
   create_by         varchar(64)     default ''                 comment '创建者',
-	update_time       datetime     comment '更新时间',
+  relation_Id    varchar(30)        comment '关联富文本Id',
+  update_time       datetime     comment '更新时间',
   PRIMARY KEY (`news_Id`)
 ) ENGINE=InnoDB auto_increment=100 comment = '新闻资讯表';
 
@@ -105,7 +106,20 @@ create table `tongyu_news_comment` (
 `user_Id` varchar(255) default null comment '评论者昵称',
 `content` varchar(255) default null comment '评论的内容',
 `news_id` int(11) default null comment '评论的新闻id',
-  create_time       datetime     comment '创建时间',
+ create_time       datetime     comment '创建时间',
 primary key (`id`)
 
 ) ENGINE=InnoDB auto_increment=100 comment '评论表';
+
+
+drop table if exists tongyu_rich_text;
+create table `tongyu_rich_text` (
+id int(11) not null auto_increment comment '主键id',
+title  varchar(50)     default null   comment 'title',
+create_Id varchar(20) default null comment '建立者ID',
+content varchar(5000) default null comment '富文本内容',
+create_Name varchar(255) default null comment '建立者名称',
+ create_time       datetime     comment '创建时间',
+ update_time       datetime     comment '更新时间',
+primary key (`id`)
+)ENGINE=InnoDB auto_increment=100 comment '富文本表';

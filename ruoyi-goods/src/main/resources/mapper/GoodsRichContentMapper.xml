@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.goods.manage.mapper.GoodsRichContentMapper">
+    <resultMap id="richContentMap" type="com.ruoyi.goods.domain.RichContent">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="create_Id" jdbcType="VARCHAR" property="createId" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="create_Name" jdbcType="VARCHAR" property="createName" />
+        <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+        <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+    </resultMap>
+    <insert id="insertRichContent" parameterType="com.ruoyi.goods.domain.RichContent">
+        insert into tongyu_rich_text (
+        <if test="title != null and title != '' ">title, </if>
+        <if test="createId != null and createId != '' ">create_Id, </if>
+        <if test="content != null and content != '' ">content, </if>
+        <if test="createName != null and createName != '' ">create_Name, </if>
+        create_time
+        )values(
+        <if test="title != null and title != ''">#{title}, </if>
+        <if test="createId != null and createId != ''">#{createId}, </if>
+        <if test="content != null and content != ''">#{content}, </if>
+        <if test="createName != null and createName != ''">#{createName}, </if>
+        sysdate()
+        )
+    </insert>
+    <select id="selectRichContentList" parameterType="com.ruoyi.goods.domain.RichContent" resultMap="richContentMap">
+        select id,title,create_Id,content,create_Name,create_time
+        ,update_time FROM tongyu_rich_text
+        <where>
+            <if test="title != null and title != ''">
+                AND title like concat('%', #{title}, '%')
+            </if>
+        </where>
+        ORDER BY create_time
+        LIMIT #{pageStart},#{pageLimit}
+    </select>
+    <select id="selectRichContentListCount" parameterType="com.ruoyi.goods.domain.RichContent" resultType="java.lang.Integer">
+        select Count(*)
+        FROM tongyu_rich_text
+        <where>
+            <if test="title != null and title != ''">
+                AND title like concat('%', #{title}, '%')
+            </if>
+        </where>
+    </select>
+    <update id="updateRichContent" parameterType="SysNotice">
+        update tongyu_rich_text
+        <set>
+            <if test="title != null and title != ''">title = #{title}, </if>
+            <if test="content != null">content = #{content}, </if>
+            <if test="createName != null and createName != ''">create_Name = #{createName}, </if>
+            <if test="createId != null and createId != ''">create_Id = #{createId},</if>
+            update_time = sysdate()
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="deleteRichContentById" parameterType="java.lang.String">
+        delete from tongyu_rich_text where id =#{id}
+    </delete>
+</mapper>

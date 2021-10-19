@@ -12,6 +12,22 @@ public class News {
    private  String  readyNumber;
    private  String  collectionNumber;
    private  String  createBy;
+   private  String relationId;
+
+    /**
+     * 页码
+     */
+    private int pageStart;
+
+    /**
+     * 每页条数
+     */
+    private int pageLimit;
+
+    /**
+     * 总条数
+     */
+    private int total;
 
     public long getNewsId () {
         return newsId;
@@ -91,6 +107,38 @@ public class News {
 
     public void setCreateBy ( String createBy ) {
         this.createBy = createBy;
+    }
+
+    public int getPageStart () {
+        return pageStart;
+    }
+
+    public void setPageStart ( int pageStart ) {
+        this.pageStart = pageStart;
+    }
+
+    public int getPageLimit () {
+        return pageLimit;
+    }
+
+    public void setPageLimit ( int pageLimit ) {
+        this.pageLimit = pageLimit;
+    }
+
+    public int getTotal () {
+        return total;
+    }
+
+    public void setTotal ( int total ) {
+        this.total = total;
+    }
+
+    public String getRelationId () {
+        return relationId;
+    }
+
+    public void setRelationId ( String relationId ) {
+        this.relationId = relationId;
     }
 
     @Override

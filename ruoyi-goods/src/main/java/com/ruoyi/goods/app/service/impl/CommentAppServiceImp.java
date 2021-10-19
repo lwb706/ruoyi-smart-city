@@ -2,7 +2,7 @@ package com.ruoyi.goods.app.service.impl;
 
 import com.ruoyi.goods.app.service.GoodsAppService;
 import com.ruoyi.goods.domain.CommentNews;
-import com.ruoyi.goods.manage.mapper.SysNewsContextMapper;
+import com.ruoyi.goods.manage.mapper.GoodsNewsContextMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CommentAppServiceImp implements GoodsAppService {
     @Autowired
-    private SysNewsContextMapper sysNewsContextMapper;
+    private GoodsNewsContextMapper goodsNewsContextMapper;
     private final static Logger logger = LoggerFactory
             .getLogger( CommentAppServiceImp.class);
     @Override
@@ -29,7 +29,7 @@ public class CommentAppServiceImp implements GoodsAppService {
      * @param commentNews
      */
     private void insertComment(CommentNews commentNews){
-        //1、修改订单信息
-        sysNewsContextMapper.insertComment(commentNews);
+        //评论信息
+        goodsNewsContextMapper.insertComment(commentNews);
     }
 }

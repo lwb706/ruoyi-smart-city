@@ -5,11 +5,13 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-public interface SysNewsContextMapper {
+public interface GoodsNewsContextMapper {
     int  insertNews ( News news );
     void updateNews ( News news );
     void deleteNewsById ( String newsId );
     List<News> selectNewsList ( News news );
+    int selectNewsListCount ( News news );
     int  insertComment ( CommentNews commentNews );
+
 
 }

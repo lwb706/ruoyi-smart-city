@@ -1,20 +1,23 @@
 package com.ruoyi.goods.manage.service.impl;
 
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.goods.base.enums.OperTypeEnum;
+import com.ruoyi.goods.base.util.ImgUtil;
 import com.ruoyi.goods.domain.News;
-import com.ruoyi.goods.manage.mapper.SysNewsContextMapper;
+import com.ruoyi.goods.manage.mapper.GoodsNewsContextMapper;
 import com.ruoyi.goods.manage.service.GoodsManageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class NewsManageServiceImpl implements GoodsManageService {
     @Autowired
-    private SysNewsContextMapper sysNewsContextMapper;
+    private GoodsNewsContextMapper goodsNewsContextMapper;
     private final static Logger logger = LoggerFactory
             .getLogger(NewsManageServiceImpl.class);
     @Override
@@ -46,7 +49,7 @@ public class NewsManageServiceImpl implements GoodsManageService {
         /*if (StringUtils.isNotBlank (news.getDetails ())){
             news.setDetails (ImgUtil.handleImg(news.getDetails ()));
         }*/
-        sysNewsContextMapper.updateNews(news);
+        goodsNewsContextMapper.updateNews(news);
     }
 
 
@@ -58,10 +61,10 @@ public class NewsManageServiceImpl implements GoodsManageService {
     private void insertNews(Object obj){
         //1、修改订单信息
         News news = (News) obj;
-        /*if (StringUtils.isNotBlank (news.getDetails ())){
+        if (StringUtils.isNotBlank (news.getDetails ())){
             news.setDetails (ImgUtil.handleImg(news.getDetails ()));
-        }*/
-        sysNewsContextMapper.insertNews(news);
+        }
+        goodsNewsContextMapper.insertNews(news);
     }
    /**
      * 删除新闻信息
@@ -70,17 +73,23 @@ public class NewsManageServiceImpl implements GoodsManageService {
     private void deleteNews(Object obj){
         //1、修改订单信息
         News news = (News) obj;
-        sysNewsContextMapper.deleteNewsById(String.valueOf (news.getNewsId ()));
+        goodsNewsContextMapper.deleteNewsById(String.valueOf (news.getNewsId ()));
     }
     /**
      * 查询新闻信息列表
      * @param obj
      * @return
      */
-    private List<News> selectNewsList(Object obj){
+    private Map<String, Object> selectNewsList(Object obj){
+        Map<String, Object> map = new HashMap<> ();
         News news = (News) obj;
-        List<News> newsList = sysNewsContextMapper.selectNewsList(news);
-        return newsList;
+        map.put("pageStart", news.getPageStart());
+        map.put("pageLimit", news.getPageLimit());
+        news.setPageStart( ImgUtil.getStart(news.getPageStart(), news.getPageLimit()));
+        map.put("total",goodsNewsContextMapper.selectNewsListCount(news));
+        map.put("list", goodsNewsContextMapper.selectNewsList(news));
+       // List<News> newsList = sysNewsContextMapper.selectNewsList(news);
+        return map;
     }
 
 

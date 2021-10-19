@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.goods.manage.mapper.SysNewsContextMapper">
+<mapper namespace="com.ruoyi.goods.manage.mapper.GoodsNewsContextMapper">
 
     <resultMap id="newsMap" type="com.ruoyi.goods.domain.News">
         <result column="news_Id" jdbcType="BIGINT" property="newsId" />
@@ -9,25 +9,12 @@
         <result column="carousel_Name" jdbcType="VARCHAR" property="carouselName" />
         <result column="thumbnail_Name" jdbcType="VARCHAR" property="thumbnailName" />
         <result column="details" jdbcType="VARCHAR" property="details" />
+        <result column="relation_Id" jdbcType="VARCHAR" property="relationId" />
         <result column="create_time" jdbcType="VARCHAR" property="createTime" />
         <result column="ready_Number" jdbcType="BIGINT" property="readyNumber" />
         <result column="collection_Number" jdbcType="BIGINT" property="collectionNumber" />
         <result column="create_by" jdbcType="VARCHAR" property="createBy" />
     </resultMap>
-
-    <sql id="column_list">
-        NEW_ID,
-        TITLE,
-        TYPE,
-        carousel_Name,
-        thumbnail_Name,
-        DETAILS,
-        create_time,
-        DETAIL,
-        ready_Number,
-        collection_Number,
-        create_by
-    </sql>
     <insert id="insertNews" parameterType="com.ruoyi.goods.domain.News">
         insert into tongyu_news (
         <if test="title != null and title != '' ">title, </if>
@@ -35,6 +22,7 @@
         <if test="carouselName != null and carouselName != '' ">carousel_Name, </if>
         <if test="thumbnailName != null and thumbnailName != '' ">thumbnail_Name, </if>
         <if test="details != null and details != ''">details,</if>
+        <if test="relationId != null and relationId != ''">relation_Id,</if>
         <if test="createBy != null and createBy != ''">create_by,</if>
         ready_Number,
         collection_Number,
@@ -45,6 +33,7 @@
         <if test="carouselName != null and carouselName != ''">#{carouselName}, </if>
         <if test="thumbnailName != null and thumbnailName != ''">#{thumbnailName}, </if>
         <if test="details != null and details != ''">#{details},</if>
+        <if test="relationId != null and relationId != ''">#{relationId},</if>
         <if test="createBy != null and createBy != ''">#{createBy},</if>
         0,
         0,
@@ -52,7 +41,21 @@
         )
     </insert>
     <select id="selectNewsList" parameterType="News" resultMap="newsMap">
-        select news_Id,type,title,carousel_Name,thumbnail_Name,details,create_time,ready_Number,collection_Number,create_by
+        select news_Id,type,relation_Id,title,carousel_Name,thumbnail_Name,details,create_time,ready_Number,collection_Number,create_by
+        FROM tongyu_news
+        <where>
+            <if test="title != null and title != ''">
+                AND title like concat('%', #{title}, '%')
+            </if>
+            <if test="type != null and type != ''">
+                AND type = #{type}
+            </if>
+            ORDER BY create_time
+            LIMIT #{pageStart},#{pageLimit}
+        </where>
+    </select>
+    <select id="selectNewsListCount" parameterType="News" resultType="java.lang.Integer">
+        select Count(*)
         FROM tongyu_news
         <where>
             <if test="title != null and title != ''">
@@ -63,7 +66,6 @@
             </if>
         </where>
     </select>
-
     <update id="updateNews" parameterType="SysNotice">
         update tongyu_news
         <set>
@@ -71,6 +73,7 @@
             <if test="type != null and type != ''">type = #{type}, </if>
             <if test="carouselName != null">carousel_Name = #{carouselName}, </if>
             <if test="details != null and details != ''">details = #{details}, </if>
+            <if test="relationId != null and relationId != ''">relation_Id = #{relationId}, </if>
             <if test="thumbnailName != null and thumbnailName != ''">thumbnail_Name = #{thumbnailName},</if>
             update_time = sysdate()
         </set>
@@ -93,4 +96,5 @@
         sysdate()
         )
     </insert>
+
 </mapper>
