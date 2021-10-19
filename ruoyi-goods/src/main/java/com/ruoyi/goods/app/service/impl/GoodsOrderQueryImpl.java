@@ -7,11 +7,12 @@ import com.ruoyi.goods.domain.GoodsOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+@Service
 public class GoodsOrderQueryImpl implements GoodsAppService {
     private static final Logger LOGGER = LoggerFactory.getLogger(GoodsOrderQueryImpl.class);
 

@@ -140,7 +140,7 @@
             <if test="id != null and id != ''">
                 and ID = #{id,jdbcType=VARCHAR}
             </if>
-            <if test="type != null">
+            <if test="type != null and type > 0" >
                 and TYPE = #{type,jdbcType=INTEGER}
             </if>
             <if test="commodityType != null and commodityType != ''">
@@ -158,7 +158,7 @@
             <if test="id != null and id != ''">
                 and ID = #{id,jdbcType=VARCHAR}
             </if>
-            <if test="type != null">
+            <if test="type != null  and type > 0">
                 and TYPE = #{type,jdbcType=INTEGER}
             </if>
             <if test="commodityType != null and commodityType != ''">

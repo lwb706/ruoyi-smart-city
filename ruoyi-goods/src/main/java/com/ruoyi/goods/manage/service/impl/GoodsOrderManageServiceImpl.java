@@ -3,6 +3,7 @@ package com.ruoyi.goods.manage.service.impl;
 import com.ruoyi.goods.app.mapper.GoodsPlaceOrderMapper;
 import com.ruoyi.goods.base.enums.OperTypeEnum;
 import com.ruoyi.goods.base.enums.OrderStatusEnum;
+import com.ruoyi.goods.base.util.ImgUtil;
 import com.ruoyi.goods.domain.Goods;
 import com.ruoyi.goods.domain.GoodsOrder;
 import com.ruoyi.goods.manage.mapper.GoodsMessageMapper;
@@ -12,7 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * CLASS_NAME
@@ -83,13 +86,18 @@ public class GoodsOrderManageServiceImpl implements GoodsManageService {
 
     }
     /**
-     * 查询商品信息列表
+     * 查询商品订单信息列表
      * @param obj
      * @return
      */
-    private List<GoodsOrder> queryGoodsOrderList(Object obj){
+    private Map<String, Object> queryGoodsOrderList(Object obj){
+        Map<String, Object> map = new HashMap<>();
         GoodsOrder goodsOrder = (GoodsOrder) obj;
-        List<GoodsOrder> goodsOrderList = goodsPlaceOrderMapper.queryGoodsOrderList(goodsOrder);
-        return goodsOrderList;
+        map.put("pageStart", goodsOrder.getPageStart());
+        map.put("pageLimit", goodsOrder.getPageLimit());
+        goodsOrder.setPageStart(ImgUtil.getStart(goodsOrder.getPageStart(), goodsOrder.getPageLimit()));
+        map.put("total", goodsPlaceOrderMapper.queryGoodsOrderCount(goodsOrder));
+        map.put("list", goodsPlaceOrderMapper.queryGoodsOrderList(goodsOrder));
+        return map;
     }
 }

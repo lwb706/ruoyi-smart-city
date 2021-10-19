@@ -12,6 +12,7 @@ import com.sun.xml.internal.bind.v2.TODO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +25,7 @@ import java.util.List;
  * ModifyDate 2021/10/12 11:45
  * @Version 1.0
  */
+@Service
 public class GoodsPlaceOrderImpl implements GoodsAppService {
     private static final Logger LOGGER = LoggerFactory.getLogger(GoodsPlaceOrderImpl.class);
 
@@ -42,8 +44,8 @@ public class GoodsPlaceOrderImpl implements GoodsAppService {
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public <T> T actionRequest(Object obj) throws Exception {
+        GoodsOrder goodsOrder = (GoodsOrder) obj;
         try {
-            GoodsOrder goodsOrder = (GoodsOrder) obj;
             //插入订单到数据库
             addGoodsOrder(goodsOrder);
             //进行商品剩余量的扣减
@@ -54,8 +56,9 @@ public class GoodsPlaceOrderImpl implements GoodsAppService {
             LOGGER.info("[GoodsPlaceOrderImpl],下单失败，失败原因：{}", e.getMessage(), e);
             throw e;
         }
-        return null;
+        return (T) goodsOrder;
     }
+
 
     /**
      * 下单操作
@@ -65,6 +68,7 @@ public class GoodsPlaceOrderImpl implements GoodsAppService {
         goodsOrder.setId(IdUtils.fastSimpleUUID());
         //未支付状态
         goodsOrder.setOrderStatus(OrderStatusEnum.UNPAID.getCode());
+        goodsOrder.setCreateTime(DateUtils.getTime());
         goodsPlaceOrderMapper.insertGoodsOrder(goodsOrder);
     }
 

@@ -1,15 +1,13 @@
 package com.ruoyi.goods.app;
 
-import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.entity.SysUser;
-import com.ruoyi.common.json.JSON;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.goods.app.enums.GoodsAppActionEnum;
 import com.ruoyi.goods.app.router.GoodsAppRouter;
 import com.ruoyi.goods.base.util.Contants;
+import com.ruoyi.goods.base.util.JacksonUtil;
 import com.ruoyi.goods.domain.ResultMessage;
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @RestController
 public class GoodsAppController extends BaseController{
+
+
 
 
     private static final String TRAN_CODE = "tranCode";
@@ -55,7 +55,7 @@ public class GoodsAppController extends BaseController{
         try {
             if(StringUtils.isNotEmpty(tranceCode)){
                 GoodsAppActionEnum goodsAppActionEnum = GoodsAppActionEnum.valueOf(tranceCode);
-                Object obj = JSON.unmarshal(request.getParameter(PARAM), goodsAppActionEnum.getDomainClass());
+                Object obj = JacksonUtil.json2pojo(request.getParameter(PARAM), goodsAppActionEnum.getDomainClass());
                 Object result = goodsAppRouter.getGoodsAppService(tranceCode).actionRequest(obj);
                 //返回成功数据
                 return success(result);

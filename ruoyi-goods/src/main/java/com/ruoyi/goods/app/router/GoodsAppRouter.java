@@ -21,6 +21,7 @@ public class GoodsAppRouter {
         GOODS0001(GoodsAppConstants.GOODS0001, "goodsAppServiceImpl"),
         GOODS0005(GoodsAppConstants.GOODS0005, "noticesAppServiceImpl"),
         GOODS0006(GoodsAppConstants.GOODS0006, "commentAppServiceImp"),
+        GOODS0010(GoodsAppConstants.GOODS0010, "goodsAppQueryServiceImpl"),
         GOODS0011(GoodsAppConstants.GOODS0011, "goodsOrderCancelImpl"),
         GOODS0012(GoodsAppConstants.GOODS0012, "goodsPlaceOrderImpl"),
         GOODS0015(GoodsAppConstants.GOODS0015, "goodsOrderQueryImpl");

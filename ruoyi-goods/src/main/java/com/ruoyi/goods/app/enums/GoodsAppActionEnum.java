@@ -19,7 +19,7 @@ public enum GoodsAppActionEnum {
     GOODS0002(GoodsAppConstants.GOODS0002, Object.class),
     GOODS0005(GoodsAppConstants.GOODS0005, NoticeParam.class),
     GOODS0006(GoodsAppConstants.GOODS0006, CommentNews.class),
-
+    GOODS0010(GoodsAppConstants.GOODS0010, Goods.class),
     GOODS0011(GoodsAppConstants.GOODS0011, GoodsOrder.class),
     GOODS0012(GoodsAppConstants.GOODS0012, GoodsOrder.class),
     GOODS0015(GoodsAppConstants.GOODS0015, GoodsOrder.class);

@@ -3,10 +3,10 @@ package com.ruoyi.goods.manage;
 import com.ruoyi.common.config.RuoYiConfig;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.common.json.JSON;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.file.FileUploadUtils;
 import com.ruoyi.goods.base.util.Contants;
+import com.ruoyi.goods.base.util.JacksonUtil;
 import com.ruoyi.goods.domain.ResultMessage;
 import com.ruoyi.goods.manage.enums.GoodsManageActionEnum;
 import com.ruoyi.goods.manage.router.GoodsManageRouter;
@@ -50,7 +50,7 @@ public class GoodsManageController extends BaseController{
         try {
             if(StringUtils.isNotEmpty(tranceCode)){
                 GoodsManageActionEnum goodsManageActionEnum = GoodsManageActionEnum.valueOf(tranceCode);
-                Object obj = JSON.unmarshal(request.getParameter(PARAM), goodsManageActionEnum.getDomainClass());
+                Object obj = JacksonUtil.json2pojo(request.getParameter(PARAM), goodsManageActionEnum.getDomainClass());
                 Object result = goodsManageRouter.getGoodsManageService(tranceCode).actionRequest(obj, goodsManageActionEnum.getOperType());
                 //返回成功数据
                 return success(result);

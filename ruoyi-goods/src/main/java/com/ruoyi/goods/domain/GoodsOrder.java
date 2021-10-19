@@ -75,12 +75,12 @@ public class GoodsOrder {
     /**
      * 创建时间
      */
-    private Timestamp createTime;
+    private String createTime;
 
     /**
      * 支付时间
      */
-    private Timestamp payTime;
+    private String payTime;
 
     private String json;
 
@@ -98,6 +98,32 @@ public class GoodsOrder {
      * 总条数
      */
     private int total;
+
+    /**
+     * 查询开始日期
+     */
+    private String startDate;
+
+    /**
+     * 查询结束日期
+     */
+    private String endDate;
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
 
     public String getId() {
         return id;
@@ -171,19 +197,19 @@ public class GoodsOrder {
         this.phone = phone;
     }
 
-    public Timestamp getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Timestamp createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
-    public Timestamp getPayTime() {
+    public String getPayTime() {
         return payTime;
     }
 
-    public void setPayTime(Timestamp payTime) {
+    public void setPayTime(String payTime) {
         this.payTime = payTime;
     }
 

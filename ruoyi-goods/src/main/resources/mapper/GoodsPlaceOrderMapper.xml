@@ -16,8 +16,8 @@
         <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
         <result column="PHONE" jdbcType="VARCHAR" property="phone" />
         <result column="JSON" jdbcType="VARCHAR" property="json" />
-        <result column="CREATE_DATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
-        <result column="PAY_TIME" jdbcType="TIMESTAMP" property="payTime" />
+        <result column="CREATE_DATE_TIME" jdbcType="VARCHAR" property="createTime" />
+        <result column="PAY_TIME" jdbcType="VARCHAR" property="payTime" />
 
     </resultMap>
 
@@ -106,7 +106,22 @@
     </delete>
 
     <select id="queryGoodsOrderList" parameterType="com.ruoyi.goods.domain.GoodsOrder" resultMap="goodsOrderMap">
-        SELECT <include refid="column_list"/>
+        SELECT
+        ID,
+        COMMODITY_ID,
+        COMMODITY_NAME,
+        TYPE,
+        SPECIFICATIONS,
+        PRICES,
+        ORDER_STATUS,
+        PAY,
+        SUM,
+        USER_ID,
+        ADDRESS,
+        PHONE,
+        JSON,
+        CREATE_DATE_TIME,
+        PAY_TIME
         FROM tongyu_shoporder
         <where>
             <if test="id != null and id != ''" >
@@ -126,6 +141,12 @@
             </if>
             <if test="phone != null and phone != ''">
                 and PHONE = #{phone,jdbcType=VARCHAR}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and CREATE_DATE_TIME <![CDATA[>=]]> #{startDate,jdbcType=VARCHAR}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and CREATE_DATE_TIME <![CDATA[<=]]> #{endDate,jdbcType=VARCHAR}
             </if>
         </where>
         ORDER BY CREATE_DATE_TIME
@@ -153,6 +174,12 @@
             </if>
             <if test="phone != null and phone != ''">
                 and PHONE = #{phone,jdbcType=VARCHAR}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and CREATE_DATE_TIME <![CDATA[>=]]> #{startDate,jdbcType=VARCHAR}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and CREATE_DATE_TIME <![CDATA[<=]]> #{endDate,jdbcType=VARCHAR}
             </if>
         </where>
         ORDER BY CREATE_DATE_TIME

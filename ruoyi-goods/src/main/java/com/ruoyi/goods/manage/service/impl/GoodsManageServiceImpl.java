@@ -84,8 +84,8 @@ public class GoodsManageServiceImpl implements GoodsManageService {
      */
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     private void deleteGoods(Object obj){
-        String id = (String) obj;
-        goodsMessageMapper.deleteGoods(id);
+        Goods goods = (Goods) obj;
+        goodsMessageMapper.deleteGoods(goods.getId());
     }
 
     /**
