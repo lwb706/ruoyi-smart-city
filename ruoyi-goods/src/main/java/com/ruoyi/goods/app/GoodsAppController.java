@@ -46,12 +46,12 @@ public class GoodsAppController extends BaseController{
     public Object getParamMessage(HttpServletRequest request, HttpServletResponse response){
         String tranceCode = request.getParameter(TRAN_CODE);
         SysUser user = (SysUser)request.getSession().getAttribute("SysUser");
-        if (user==null){
-            ResultMessage res=new ResultMessage();
-            res.setReturnCode ( Contants.LOGIN_NONE);
-            res.setReturnMessage ( "用户未登录" );
-            return success(res);
-        }
+//        if (user==null){
+//            ResultMessage res=new ResultMessage();
+//            res.setReturnCode ( Contants.LOGIN_NONE);
+//            res.setReturnMessage ( "用户未登录" );
+//            return success(res);
+//        }
         try {
             if(StringUtils.isNotEmpty(tranceCode)){
                 GoodsAppActionEnum goodsAppActionEnum = GoodsAppActionEnum.valueOf(tranceCode);

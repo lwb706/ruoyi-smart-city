@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.goods.manage.mapper.SysNewsMapper">
+<mapper namespace="com.ruoyi.goods.manage.mapper.SysNewsContextMapper">
 
     <resultMap id="newsMap" type="com.ruoyi.goods.domain.News">
-        <result column="NEW_ID" jdbcType="BIGINT" property="newsId" />
-        <result column="TITLE" jdbcType="VARCHAR" property="title" />
+        <result column="news_Id" jdbcType="BIGINT" property="newsId" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
         <result column="TYPE" jdbcType="VARCHAR" property="type" />
         <result column="carousel_Name" jdbcType="VARCHAR" property="carouselName" />
         <result column="thumbnail_Name" jdbcType="VARCHAR" property="thumbnailName" />
-        <result column="DETAILS" jdbcType="VARCHAR" property="details" />
+        <result column="details" jdbcType="VARCHAR" property="details" />
         <result column="create_time" jdbcType="VARCHAR" property="createTime" />
         <result column="ready_Number" jdbcType="BIGINT" property="readyNumber" />
         <result column="collection_Number" jdbcType="BIGINT" property="collectionNumber" />
@@ -51,8 +51,8 @@
         sysdate()
         )
     </insert>
-    <select id="selectNewsList" parameterType="com.ruoyi.goods.domain.News" resultMap="newsMap">
-        select news_Id,title,carousel_Name,thumbnail_Name,details,create_time,ready_Number,collection_Number,create_by
+    <select id="selectNewsList" parameterType="News" resultMap="newsMap">
+        select news_Id,type,title,carousel_Name,thumbnail_Name,details,create_time,ready_Number,collection_Number,create_by
         FROM tongyu_news
         <where>
             <if test="title != null and title != ''">
@@ -64,7 +64,7 @@
         </where>
     </select>
 
-    <update id="updateNews" parameterType="com.ruoyi.goods.domain.News">
+    <update id="updateNews" parameterType="SysNotice">
         update tongyu_news
         <set>
             <if test="title != null and title != ''">title = #{title}, </if>
@@ -82,12 +82,12 @@
     </delete>
     <insert id="insertComment" parameterType="com.ruoyi.goods.domain.CommentNews">
         insert into tongyu_news_comment (
-        <if test="nickName != null and nickName != '' ">news_Id, </if>
+        <if test="userId != null and userId != '' ">user_Id, </if>
         <if test="content != null and content != '' ">content, </if>
         <if test="newsId != null and newsId != ''">news_Id,</if>
         create_time
         )values(
-        <if test="newsId != null and newsId != ''">#{newsId}, </if>
+        <if test="userId != null and userId != ''">#{userId}, </if>
         <if test="content != null and content != ''">#{content}, </if>
         <if test="newsId != null and newsId != ''">#{newsId}, </if>
         sysdate()

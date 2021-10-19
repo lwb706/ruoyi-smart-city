@@ -128,7 +128,7 @@ public class SysLoginService
             throw new UserBlockedException();
         }
 
-        passwordService.validate(user, "8e6d98b90472783cc73c17047ddccf36");
+        passwordService.validateApp(user);
 
         AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success")));
         recordLoginInfo(user.getUserId());

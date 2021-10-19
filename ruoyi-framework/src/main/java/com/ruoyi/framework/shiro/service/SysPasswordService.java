@@ -56,18 +56,35 @@ public class SysPasswordService
             throw new UserPasswordRetryLimitExceedException(Integer.valueOf(maxRetryCount).intValue());
         }
 
-        /*if (!matches(user, password))
+        if (!matches(user, password))
         {
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(loginName, Constants.LOGIN_FAIL, MessageUtils.message("user.password.retry.limit.count", retryCount)));
             loginRecordCache.put(loginName, retryCount);
             throw new UserPasswordNotMatchException();
         }
         else
-        {*/
+        {
             clearLoginRecordCache(loginName);
-        //}
+        }
     }
+    public void validateApp(SysUser user)
+    {
+        String loginName = user.getLoginName();
 
+        AtomicInteger retryCount = loginRecordCache.get(loginName);
+
+        if (retryCount == null)
+        {
+            retryCount = new AtomicInteger(0);
+            loginRecordCache.put(loginName, retryCount);
+        }
+        if (retryCount.incrementAndGet() > Integer.valueOf(maxRetryCount).intValue())
+        {
+            AsyncManager.me().execute(AsyncFactory.recordLogininfor(loginName, Constants.LOGIN_FAIL, MessageUtils.message("user.password.retry.limit.exceed", maxRetryCount)));
+            throw new UserPasswordRetryLimitExceedException(Integer.valueOf(maxRetryCount).intValue());
+        }
+            clearLoginRecordCache(loginName);
+    }
     public boolean matches(SysUser user, String newPassword)
     {
         return user.getPassword().equals(encryptPassword(user.getLoginName(), newPassword, user.getSalt()));
