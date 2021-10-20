@@ -40,7 +40,7 @@
         sysdate()
         )
     </insert>
-    <select id="selectNewsList" parameterType="News" resultMap="newsMap">
+    <select id="selectNewsList" parameterType="com.ruoyi.goods.domain.News" resultMap="newsMap">
         select news_Id,type,relation_Id,title,carousel_Name,thumbnail_Name,details,create_time,ready_Number,collection_Number,create_by
         FROM tongyu_news
         <where>
@@ -54,7 +54,7 @@
             LIMIT #{pageStart},#{pageLimit}
         </where>
     </select>
-    <select id="selectNewsListCount" parameterType="News" resultType="java.lang.Integer">
+    <select id="selectNewsListCount" parameterType="com.ruoyi.goods.domain.News" resultType="java.lang.Integer">
         select Count(*)
         FROM tongyu_news
         <where>
@@ -66,7 +66,7 @@
             </if>
         </where>
     </select>
-    <update id="updateNews" parameterType="SysNotice">
+    <update id="updateNews" parameterType="com.ruoyi.goods.domain.News">
         update tongyu_news
         <set>
             <if test="title != null and title != ''">title = #{title}, </if>

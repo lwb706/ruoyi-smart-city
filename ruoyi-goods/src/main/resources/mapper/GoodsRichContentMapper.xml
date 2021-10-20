@@ -45,7 +45,7 @@
             </if>
         </where>
     </select>
-    <update id="updateRichContent" parameterType="SysNotice">
+    <update id="updateRichContent" parameterType="com.ruoyi.goods.domain.RichContent">
         update tongyu_rich_text
         <set>
             <if test="title != null and title != ''">title = #{title}, </if>

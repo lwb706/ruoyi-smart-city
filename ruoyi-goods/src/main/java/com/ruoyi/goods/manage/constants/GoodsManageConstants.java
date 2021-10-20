@@ -65,4 +65,17 @@ public class GoodsManageConstants {
 
     /**富文本删除*/
     public static final String GOODS0035 = "GOODS0035";
+
+
+    /**配置数据新增*/
+    public static final String GOODS0036 = "GOODS0036";
+
+    /**配置数据删除*/
+    public static final String GOODS0037 = "GOODS0037";
+
+    /**配置数据修改*/
+    public static final String GOODS0038 = "GOODS0038";
+
+    /**配置数据查询*/
+    public static final String GOODS0039 = "GOODS0039";
 }

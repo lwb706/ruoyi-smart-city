@@ -1,12 +1,12 @@
 package com.ruoyi.goods.manage;
 
+import com.alibaba.fastjson.JSON;
 import com.ruoyi.common.config.RuoYiConfig;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.file.FileUploadUtils;
 import com.ruoyi.goods.base.util.Contants;
-import com.ruoyi.goods.base.util.JacksonUtil;
 import com.ruoyi.goods.domain.ResultMessage;
 import com.ruoyi.goods.manage.enums.GoodsManageActionEnum;
 import com.ruoyi.goods.manage.router.GoodsManageRouter;
@@ -14,10 +14,8 @@ import org.apache.tomcat.jni.FileInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * CLASS_NAME
@@ -37,28 +35,28 @@ public class GoodsManageController extends BaseController{
     @Autowired
     private GoodsManageRouter goodsManageRouter;
 
-
     /**
      * manage Action请求接口
-     * @param request
-     * @param response
      * @return
      */
+
     @RequestMapping("/goods/manage")
-    public Object getParamMessage(HttpServletRequest request, HttpServletResponse response){
-        String tranceCode = request.getParameter(TRAN_CODE);
+    public Object getParamMessage(@RequestBody Map<Object,Object> param){
+        String tranCode= (String) param.get ( "tranCode" );
         try {
-            if(StringUtils.isNotEmpty(tranceCode)){
-                GoodsManageActionEnum goodsManageActionEnum = GoodsManageActionEnum.valueOf(tranceCode);
-                Object obj = JacksonUtil.json2pojo(request.getParameter(PARAM), goodsManageActionEnum.getDomainClass());
-                Object result = goodsManageRouter.getGoodsManageService(tranceCode).actionRequest(obj, goodsManageActionEnum.getOperType());
+            if(StringUtils.isNotEmpty(tranCode)){
+                GoodsManageActionEnum goodsManageActionEnum = GoodsManageActionEnum.valueOf(tranCode);
+                String jsonString = JSON.toJSONString(param);
+                Object obj = JSON.parseObject(jsonString, goodsManageActionEnum.getDomainClass());//json转对象
+                Object result = goodsManageRouter.getGoodsManageService(tranCode).actionRequest(obj, goodsManageActionEnum.getOperType());
                 //返回成功数据
                 return success(result);
             }
         } catch (Exception e) {
-            logger.warn("商品管理端,[{}]接口请求失败", tranceCode, e);
+            logger.warn("商品管理端,[{}]接口请求失败", tranCode, e);
         }
-        return error();
+        logger.info ( "返回查询参数数据：{},【{}】",param,tranCode );
+        return error ();
     }
     //文件上传
     @PostMapping("/goods/addSave")

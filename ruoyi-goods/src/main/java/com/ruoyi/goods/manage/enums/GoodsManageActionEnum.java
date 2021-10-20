@@ -1,5 +1,6 @@
 package com.ruoyi.goods.manage.enums;
 
+import com.ruoyi.goods.app.constants.GoodsAppConstants;
 import com.ruoyi.goods.base.enums.OperTypeEnum;
 import com.ruoyi.goods.domain.*;
 import com.ruoyi.goods.domain.GoodsOrder;
@@ -28,7 +29,11 @@ public enum GoodsManageActionEnum {
     GOODS0032(GoodsManageConstants.GOODS0032, RichContent.class, OperTypeEnum.UPDATE.getCode()),
     GOODS0033(GoodsManageConstants.GOODS0033, RichContent.class, OperTypeEnum.QUERY.getCode()),
     GOODS0034(GoodsManageConstants.GOODS0034, RichContent.class, OperTypeEnum.ADD.getCode()),
-    GOODS0035(GoodsManageConstants.GOODS0035, RichContent.class, OperTypeEnum.DELETE.getCode());
+    GOODS0035(GoodsManageConstants.GOODS0035, RichContent.class, OperTypeEnum.DELETE.getCode()),
+    GOODS0036(GoodsManageConstants.GOODS0036, ConfigCenter.class, OperTypeEnum.ADD.getCode()),
+    GOODS0037(GoodsManageConstants.GOODS0037, ConfigCenter.class, OperTypeEnum.DELETE.getCode()),
+    GOODS0038(GoodsManageConstants.GOODS0038, ConfigCenter.class, OperTypeEnum.UPDATE.getCode()),
+    GOODS0039(GoodsManageConstants.GOODS0039, ConfigCenter.class, OperTypeEnum.QUERY.getCode());
     GoodsManageActionEnum(String code, Class domainClass, String operType) {
         this.code = code;
         this.domainClass = domainClass;

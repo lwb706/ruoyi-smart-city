@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.goods.manage.mapper.GoodsConfigCenterMapper">
+    <resultMap id="configCenterMap" type="com.ruoyi.goods.domain.ConfigCenter">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="create_Id" jdbcType="VARCHAR" property="createId" />
+        <result column="details" jdbcType="VARCHAR" property="details" />
+        <result column="config_Type" jdbcType="VARCHAR" property="configType" />
+        <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+        <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+        <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    </resultMap>
+    <insert id="insertConfigCenter" parameterType="com.ruoyi.goods.domain.ConfigCenter">
+        insert into tongyu_config_center (
+        <if test="title != null and title != '' ">title, </if>
+        <if test="createId != null and createId != '' ">create_Id, </if>
+        <if test="details != null and details != '' ">details, </if>
+        <if test="configType != null and configType != '' ">config_Type, </if>
+        <if test="remarks != null and remarks != '' ">remarks, </if>
+        create_time,
+        update_time
+        )values(
+        <if test="title != null and title != ''">#{title}, </if>
+        <if test="createId != null and createId != ''">#{createId}, </if>
+        <if test="details != null and details != ''">#{details}, </if>
+        <if test="configType != null and configType != ''">#{configType}, </if>
+        <if test="remarks != null and remarks != ''">#{remarks}, </if>
+        sysdate(),
+        sysdate()
+        )
+    </insert>
+    <select id="selectConfigCenterList" parameterType="com.ruoyi.goods.domain.ConfigCenter" resultMap="configCenterMap">
+        select id,title,create_Id,details,config_Type,update_time,create_time,remarks
+        FROM tongyu_config_center
+        <where>
+            <if test="title != null and title != ''">
+                AND title like concat('%', #{title}, '%')
+            </if>
+            <if test="configType != null and configType != ''">
+                AND config_Type =#{configType}
+            </if>
+            <if test="createId != null and createId != ''">
+                AND createId =#{createId}
+            </if>
+        </where>
+        ORDER BY update_time
+        LIMIT #{pageStart},#{pageLimit}
+    </select>
+    <select id="selectConfigCenterListCount" parameterType="com.ruoyi.goods.domain.ConfigCenter" resultType="java.lang.Integer">
+        select Count(*)
+        FROM tongyu_config_center
+        <where>
+            <if test="title != null and title != ''">
+                AND title like concat('%', #{title}, '%')
+            </if>
+            <if test="configType != null and configType != ''">
+                AND config_Type =#{configType}
+            </if>
+            <if test="createId != null and createId != ''">
+                AND createId =#{createId}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateConfigCenter" parameterType="com.ruoyi.goods.domain.ConfigCenter">
+        update tongyu_config_center
+        <set>
+            <if test="title != null and title != ''">title = #{title}, </if>
+            <if test="details != null">details = #{details}, </if>
+            <if test="configType != null and configType != ''">config_Type = #{configType}, </if>
+            <if test="createId != null and createId != ''">create_Id = #{createId},</if>
+            <if test="remarks != null and remarks != ''">remarks = #{remarks},</if>
+            update_time = sysdate()
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="deleteConfigCenterById" parameterType="java.lang.String">
+        delete from tongyu_config_center where id =#{id}
+    </delete>
+</mapper>

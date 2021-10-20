@@ -123,3 +123,17 @@ create_Name varchar(255) default null comment '建立者名称',
  update_time       datetime     comment '更新时间',
 primary key (`id`)
 )ENGINE=InnoDB auto_increment=100 comment '富文本表';
+
+
+drop table if exists tongyu_config_center;
+create table `tongyu_config_center` (
+id int(11) not null auto_increment comment '主键id',
+title  varchar(50)     default null   comment '标题',
+create_Id varchar(20) default null comment '建立者ID',
+details  varchar(5000) default null comment '配置数据内容',
+config_type varchar(2) default null comment '配置类型',
+remarks     varchar(1000)  default null comment '备注信息',
+create_time       datetime     comment '创建时间',
+update_time       datetime     comment '更新时间',
+primary key (`id`)
+)ENGINE=InnoDB auto_increment=100 comment '配置中心表';

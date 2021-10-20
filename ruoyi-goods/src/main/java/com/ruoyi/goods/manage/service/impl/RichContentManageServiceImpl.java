@@ -90,7 +90,6 @@ public class RichContentManageServiceImpl implements GoodsManageService {
         richContent.setPageStart( ImgUtil.getStart(richContent.getPageStart(), richContent.getPageLimit()));
         map.put("total",goodsRichContentMapper.selectRichContentListCount(richContent));
         map.put("list", goodsRichContentMapper.selectRichContentList(richContent));
-        List<RichContent> richContentList = goodsRichContentMapper.selectRichContentList(richContent);
         return map;
     }
 

@@ -1,5 +1,6 @@
 package com.ruoyi.goods.manage.router;
 
+import com.ruoyi.goods.app.constants.GoodsAppConstants;
 import com.ruoyi.goods.manage.constants.GoodsManageConstants;
 import com.ruoyi.goods.manage.service.GoodsManageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,11 @@ public class GoodsManageRouter {
         GOODS0032(GoodsManageConstants.GOODS0032, "richContentManageServiceImpl"),
         GOODS0033(GoodsManageConstants.GOODS0033, "richContentManageServiceImpl"),
         GOODS0034(GoodsManageConstants.GOODS0034, "richContentManageServiceImpl"),
-        GOODS0035(GoodsManageConstants.GOODS0035, "richContentManageServiceImpl");
+        GOODS0035(GoodsManageConstants.GOODS0035, "richContentManageServiceImpl"),
+        GOODS0036(GoodsManageConstants.GOODS0036, "goodsConfigCenterServiceImpl"),
+        GOODS0037(GoodsManageConstants.GOODS0037, "goodsConfigCenterServiceImpl"),
+        GOODS0038(GoodsManageConstants.GOODS0038, "goodsConfigCenterServiceImpl"),
+        GOODS0039(GoodsManageConstants.GOODS0039, "goodsConfigCenterServiceImpl");
         //接口编码
         private String tranceCode;
 
