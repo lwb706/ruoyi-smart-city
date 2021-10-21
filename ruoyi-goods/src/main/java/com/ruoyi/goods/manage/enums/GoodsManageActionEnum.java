@@ -33,7 +33,9 @@ public enum GoodsManageActionEnum {
     GOODS0036(GoodsManageConstants.GOODS0036, ConfigCenter.class, OperTypeEnum.ADD.getCode()),
     GOODS0037(GoodsManageConstants.GOODS0037, ConfigCenter.class, OperTypeEnum.DELETE.getCode()),
     GOODS0038(GoodsManageConstants.GOODS0038, ConfigCenter.class, OperTypeEnum.UPDATE.getCode()),
-    GOODS0039(GoodsManageConstants.GOODS0039, ConfigCenter.class, OperTypeEnum.QUERY.getCode());
+    GOODS0039(GoodsManageConstants.GOODS0039, ConfigCenter.class, OperTypeEnum.QUERY.getCode()),
+    GOODS0040(GoodsManageConstants.GOODS0040, DictData.class, OperTypeEnum.QUERY.getCode());
+
     GoodsManageActionEnum(String code, Class domainClass, String operType) {
         this.code = code;
         this.domainClass = domainClass;

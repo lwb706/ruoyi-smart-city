@@ -18,7 +18,7 @@ public class GoodsAppConstants {
     /**手机注册*/
     public static final String GOODS0003 = "GOODS0003";
 
-    /**查询操作通知接口*/
+    /**阅读操作通知接口*/
     public static final String GOODS0004 = "GOODS0004";
 
     /**查询公告信息*/

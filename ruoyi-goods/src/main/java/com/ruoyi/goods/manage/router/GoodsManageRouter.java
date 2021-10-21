@@ -38,7 +38,9 @@ public class GoodsManageRouter {
         GOODS0036(GoodsManageConstants.GOODS0036, "goodsConfigCenterServiceImpl"),
         GOODS0037(GoodsManageConstants.GOODS0037, "goodsConfigCenterServiceImpl"),
         GOODS0038(GoodsManageConstants.GOODS0038, "goodsConfigCenterServiceImpl"),
-        GOODS0039(GoodsManageConstants.GOODS0039, "goodsConfigCenterServiceImpl");
+        GOODS0039(GoodsManageConstants.GOODS0039, "goodsConfigCenterServiceImpl"),
+        GOODS0040(GoodsManageConstants.GOODS0040, "goodsDictDataServiceImpl");
+
         //接口编码
         private String tranceCode;
 

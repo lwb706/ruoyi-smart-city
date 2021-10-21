@@ -83,5 +83,4 @@ public class GoodsConfigCenterServiceImpl implements GoodsManageService {
         map.put("list", goodsConfigCenterMapper.selectConfigCenterList(configCenter));
         return map;
     }
-
 }

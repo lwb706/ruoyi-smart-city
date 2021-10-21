@@ -1,5 +1,6 @@
 package com.ruoyi.goods.manage.mapper;
 import com.ruoyi.goods.domain.ConfigCenter;
+import com.ruoyi.goods.domain.DictData;
 
 import java.util.List;
 public interface GoodsConfigCenterMapper {
@@ -8,4 +9,5 @@ public interface GoodsConfigCenterMapper {
     void deleteConfigCenterById ( String Id );
     List<ConfigCenter> selectConfigCenterList ( ConfigCenter configCenter );
     int selectConfigCenterListCount ( ConfigCenter configCenter );
+    List<DictData> selectDictData ();
 }

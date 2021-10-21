@@ -9,24 +9,25 @@ import org.springframework.stereotype.Service;
 
 /**
  * CLASS_NAME
- * DESCRIPTION 公告接口实现
+ * DESCRIPTION 公告阅读实现
  * Date 2021/10/9 15:25
  * ModifyDate 2021/10/9 15:25
  * @Version 1.0
  */
 @Service
-public class NoticesAppServiceImpl implements GoodsAppService {
+public class NoticesReadyAppServiceImpl implements GoodsAppService {
     @Autowired
     private SysNoticeServiceImpl sysNoticeServiceImpl;
     @Override
     public <T> T actionRequest(Object obj) {
         NoticeParam noice = (NoticeParam) obj;
         SysNotice sysNotice=new SysNotice();
-        /*try {
     /** 公告类型（1通知 2公告 3新闻） */
-      //  private String noticeType;
+            //todo 已存在的记录不用插入
+        sysNotice.setNoticeId (Long.parseLong (noice.getNoticeId () ));
         sysNotice.setNoticeReadName (noice.getUserId ());
         sysNotice.setNoticeType (noice.getNoticeType ());
-        return (T) sysNoticeServiceImpl.selectNoticeNoRead (sysNotice);
+        sysNoticeServiceImpl.insertNoticeReady (sysNotice);
+        return (T) noice;
     }
 }

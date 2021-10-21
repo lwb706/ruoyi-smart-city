@@ -10,7 +10,13 @@
         <result column="create_time" jdbcType="VARCHAR" property="createTime" />
         <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
         <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+        <result column="dict_label" jdbcType="VARCHAR" property="dictLabel" />
     </resultMap>
+    <resultMap id="dictMap" type="com.ruoyi.goods.domain.DictData">
+        <result column="dict_Value" jdbcType="VARCHAR" property="dictValue" />
+        <result column="dict_label" jdbcType="VARCHAR" property="dictLabel" />
+    </resultMap>
+
     <insert id="insertConfigCenter" parameterType="com.ruoyi.goods.domain.ConfigCenter">
         insert into tongyu_config_center (
         <if test="title != null and title != '' ">title, </if>
@@ -30,9 +36,9 @@
         sysdate()
         )
     </insert>
-    <select id="selectConfigCenterList" parameterType="com.ruoyi.goods.domain.ConfigCenter" resultMap="configCenterMap">
-        select id,title,create_Id,details,config_Type,update_time,create_time,remarks
-        FROM tongyu_config_center
+    <!--<select id="selectConfigCenterList" parameterType="com.ruoyi.goods.domain.ConfigCenter" resultMap="configCenterMap">
+        select a.id,a.title,a.create_Id,a.details,a.config_Type,a.update_time,a.create_time,a.remarks
+        FROM tongyu_config_center a
         <where>
             <if test="title != null and title != ''">
                 AND title like concat('%', #{title}, '%')
@@ -46,11 +52,11 @@
         </where>
         ORDER BY update_time
         LIMIT #{pageStart},#{pageLimit}
-    </select>
-    <select id="selectConfigCenterListCount" parameterType="com.ruoyi.goods.domain.ConfigCenter" resultType="java.lang.Integer">
-        select Count(*)
-        FROM tongyu_config_center
-        <where>
+    </select>-->
+    <select id="selectConfigCenterList" parameterType="com.ruoyi.goods.domain.ConfigCenter" resultMap="configCenterMap">
+        select a.id,a.title,a.create_Id,a.details,a.config_Type,a.update_time,a.create_time,a.remarks,
+        b.dict_label FROM tongyu_config_center a  left join  tongyu_dict_data b  on a.config_type=b.dict_value
+            where b.dict_type='tongyu_config_center'
             <if test="title != null and title != ''">
                 AND title like concat('%', #{title}, '%')
             </if>
@@ -60,7 +66,23 @@
             <if test="createId != null and createId != ''">
                 AND createId =#{createId}
             </if>
-        </where>
+        ORDER BY update_time
+        LIMIT #{pageStart},#{pageLimit}
+    </select>
+
+    <select id="selectConfigCenterListCount" parameterType="com.ruoyi.goods.domain.ConfigCenter" resultType="java.lang.Integer">
+        select Count(*)
+        FROM tongyu_config_center a  left join  tongyu_dict_data b  on a.config_type=b.dict_value
+        where b.dict_type='tongyu_config_center'
+        <if test="title != null and title != ''">
+            AND title like concat('%', #{title}, '%')
+        </if>
+        <if test="configType != null and configType != ''">
+            AND config_Type =#{configType}
+        </if>
+        <if test="createId != null and createId != ''">
+            AND createId =#{createId}
+        </if>
     </select>
 
     <update id="updateConfigCenter" parameterType="com.ruoyi.goods.domain.ConfigCenter">
@@ -78,4 +100,11 @@
     <delete id="deleteConfigCenterById" parameterType="java.lang.String">
         delete from tongyu_config_center where id =#{id}
     </delete>
+
+    <select id="selectDictData"  resultMap="dictMap">
+        select dict_value,
+        dict_label FROM   tongyu_dict_data
+        where dict_type='tongyu_config_center'
+    </select>
+
 </mapper>

@@ -50,9 +50,9 @@
             <if test="type != null and type != ''">
                 AND type = #{type}
             </if>
-            ORDER BY create_time
-            LIMIT #{pageStart},#{pageLimit}
         </where>
+        ORDER BY create_time
+        LIMIT #{pageStart},#{pageLimit}
     </select>
     <select id="selectNewsListCount" parameterType="com.ruoyi.goods.domain.News" resultType="java.lang.Integer">
         select Count(*)

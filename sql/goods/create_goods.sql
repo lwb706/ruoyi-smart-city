@@ -137,3 +137,29 @@ create_time       datetime     comment '创建时间',
 update_time       datetime     comment '更新时间',
 primary key (`id`)
 )ENGINE=InnoDB auto_increment=100 comment '配置中心表';
+
+-- 、商城字典表
+-- ----------------------------
+drop table if exists goods_dict_data;
+create table goods_dict_data
+(
+  dict_code        bigint(20)      not null auto_increment    comment '字典编码',
+  dict_label       varchar(100)    default ''                 comment '字典标签',
+  dict_value       varchar(100)    default ''                 comment '字典键值',
+  dict_type        varchar(100)    default ''                 comment '字典类型',
+  create_by        varchar(64)     default ''                 comment '创建者',
+  create_time      datetime                                   comment '创建时间',
+  update_by        varchar(64)     default ''                 comment '更新者',
+  update_time      datetime                                   comment '更新时间',
+  remark           varchar(500)    default null               comment '备注',
+  primary key (dict_code)
+) engine=innodb auto_increment=100 comment = '商城字典表';
+
+INSERT INTO `tongyu_dict_data`(`dict_label`, `dict_value`, `dict_type`, `create_by`,`update_by`, `remark`) VALUES ('匠人好物', '0', 'tongyu_config_center', 'admin', 'admin', '匠人好物');
+INSERT INTO `tongyu_dict_data`(`dict_label`, `dict_value`, `dict_type`, `create_by`,`update_by`, `remark`) VALUES ('商品分类', '1', 'tongyu_config_center', 'admin', 'admin', '商品分类');
+INSERT INTO `tongyu_dict_data`(`dict_label`, `dict_value`, `dict_type`, `create_by`,`update_by`, `remark`) VALUES ('商品推荐', '2', 'tongyu_config_center', 'admin', 'admin', '商品推荐');
+INSERT INTO `tongyu_dict_data`(`dict_label`, `dict_value`, `dict_type`, `create_by`,`update_by`, `remark`) VALUES ('品牌闪购', '3', 'tongyu_config_center', 'admin', 'admin', '品牌闪购');
+INSERT INTO `tongyu_dict_data`(`dict_label`, `dict_value`, `dict_type`, `create_by`,`update_by`, `remark`) VALUES ('首席推荐', '4', 'tongyu_config_center', 'admin', 'admin', '首席推荐');
+INSERT INTO `tongyu_dict_data`(`dict_label`, `dict_value`, `dict_type`, `create_by`,`update_by`, `remark`) VALUES ('商品轮播', '5', 'tongyu_config_center', 'admin', 'admin', '商品轮播');
+
+

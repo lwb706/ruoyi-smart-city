@@ -19,6 +19,7 @@ public class GoodsAppRouter {
 
     private enum StepType {
         GOODS0001(GoodsAppConstants.GOODS0001, "goodsAppServiceImpl"),
+        GOODS0004(GoodsAppConstants.GOODS0004, "noticesReadyAppServiceImpl"),
         GOODS0005(GoodsAppConstants.GOODS0005, "noticesAppServiceImpl"),
         GOODS0006(GoodsAppConstants.GOODS0006, "commentAppServiceImp"),
         GOODS0010(GoodsAppConstants.GOODS0010, "goodsAppQueryServiceImpl"),

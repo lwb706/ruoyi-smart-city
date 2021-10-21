@@ -78,4 +78,6 @@ public class GoodsManageConstants {
 
     /**配置数据查询*/
     public static final String GOODS0039 = "GOODS0039";
+    /**配置数据类型，数据字段查询*/
+    public static final String GOODS0040 = "GOODS0040";
 }

@@ -9,6 +9,7 @@ public class ConfigCenter {
     private String createTime;
     private String updateTime;
     private String remarks;
+    private String dictLabel;
     /**
      * 页码
      */
@@ -112,9 +113,17 @@ public class ConfigCenter {
         this.total = total;
     }
 
+    public String getDictLabel () {
+        return dictLabel;
+    }
+
+    public void setDictLabel ( String dictLabel ) {
+        this.dictLabel = dictLabel;
+    }
+
     @Override
     public String toString () {
-        return "ConfigCent{" +
+        return "ConfigCenter{" +
                 "id=" + id +
                 ", createId='" + createId + '\'' +
                 ", details='" + details + '\'' +
@@ -123,6 +132,7 @@ public class ConfigCenter {
                 ", createTime='" + createTime + '\'' +
                 ", updateTime='" + updateTime + '\'' +
                 ", remarks='" + remarks + '\'' +
+                ", dictLabel='" + dictLabel + '\'' +
                 ", pageStart=" + pageStart +
                 ", pageLimit=" + pageLimit +
                 ", total=" + total +
